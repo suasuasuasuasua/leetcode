@@ -13,12 +13,10 @@ class Solution:
         # 3. the final optimization is to avoid converting number to a string at
         # all. this can be done with modulo and division operators to parse out
         # the left and right numbers at each step
-        #    - in this solution, we build a new integer called x_rev left from
-        #      to right by "popping off" the rightmost number (x % 10)
-        #    - we shift the numbers by multiplying by 10 (x_rev * 10)
         x_rev = 0
-        while x > x_rev:
-            x_rev += (x_rev * 10) + x % 10
-            x /= 10
+        x_copy = x
+        while x > 0:
+            x_rev = (x_rev * 10) + x % 10
+            x //= 10
 
-        return result
+        return x_copy == x_rev
