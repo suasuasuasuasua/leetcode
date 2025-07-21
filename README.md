@@ -3,3 +3,12 @@
 > Author: Justin Hoang
 
 My repository containing my Leet Code solutions.
+
+## Workflow
+
+- No external libraries
+  - Builtins from `python` like `collections` is fine
+- Each problem will be solved under its own pull request.
+  ![PR example](./public/Screenshot_20250720_191801.png)
+- Simple text editors or IDEs `neovim` and Kate with an LSP
+  ![Kate text editor](./public/Screenshot_20250720_192153.png)
