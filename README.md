@@ -12,3 +12,7 @@ My repository containing my Leet Code solutions.
   ![PR example](./public/Screenshot_20250720_191801.png)
 - Simple text editors or IDEs `neovim` and Kate with an LSP
   ![Kate text editor](./public/Screenshot_20250720_192153.png)
+- Update progress on gitea
+  - Remember to add and resolve pull requests
+  - Add problems to the milestone and project
+  - Write quirks and new knowledge to the wiki
