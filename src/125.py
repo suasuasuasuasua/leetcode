@@ -12,20 +12,22 @@ class Solution:
 
         # NOTE: the problem statement says to sanitize the string by removoing
         # all non-alphanumeric characters AND lowercase
-        s = "".join([c for c in s if c.isalnum()]).lower()
+        s = "".join([c for c in s if c.isalnum()])
 
         # instead of check if the whole string is equal, use two pointers from
         # the left and right
         l, r = 0, len(s) - 1
         while l <= r:
+            # grab the character at the current pointer and
+            sl = s[l].lower()
+            sr = s[r].lower()
             # if the character at the pointers are not equal, then this is not
             # a palindrome
-            if s[l] != s[r]:
+            if sl != sr:
                 return False
 
             # NOTE: always remember to increment and decrement the pointers!
             l += 1
-            r += 1
             r -= 1
 
         return True
