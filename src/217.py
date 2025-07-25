@@ -17,11 +17,5 @@ class Solution:
         #      there must be a duplicate
         #    - time: O(nlogn) because of the sorting
 
-        # build the new list of numbers
-        # this should a time complexity O(n) operation
-        counter = defaultdict(int)
-        for num in nums:
-            counter[num] += 1
-
-        # check if any of the values were not equal to 1
-        return any(val != 1 for val in counter.values())
+        # convert directly to set and check the length
+        return len(set(nums)) != len(nums)
