@@ -26,5 +26,6 @@ class Solution:
             # NOTE: always remember to increment and decrement the pointers!
             l += 1
             r += 1
+            r -= 1
 
         return True
