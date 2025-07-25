@@ -29,10 +29,10 @@ class Solution:
         for c in s:
             match c:
                 # add the opening parenthesis
-                case "(" | "{" | "[":
+                case c if c in mapping.values():
                     stack.append(c)
                 # check the closing parenthesis
-                case ")" | "}" | "]" if stack and stack[-1] == mapping[c]:
+                case c if c in mapping.keys() and stack and stack[-1] == mapping[c]:
                     stack.pop()
                 # otherwise, we must have missed the match
                 case _:
