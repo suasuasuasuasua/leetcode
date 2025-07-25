@@ -14,4 +14,17 @@ class Solution:
         # all non-alphanumeric characters AND lowercase
         s = "".join([c for c in s if c.isalnum()]).lower()
 
-        return s == s[::-1]
+        # instead of check if the whole string is equal, use two pointers from
+        # the left and right
+        l, r = 0, len(s) - 1
+        while l <= r:
+            # if the character at the pointers are not equal, then this is not
+            # a palindrome
+            if s[l] != s[r]:
+                return False
+
+            # NOTE: always remember to increment and decrement the pointers!
+            l += 1
+            r += 1
+
+        return True
