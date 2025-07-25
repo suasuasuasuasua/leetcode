@@ -19,6 +19,12 @@ class Solution:
         # we can append() and pop() to add and remove to and from the stack
         stack = list()
 
+        mapping = {
+            ")": "(",
+            "}": "{",
+            "]": "[",
+        }
+
         # loop over each of the characters
         for c in s:
             match c:
@@ -26,11 +32,7 @@ class Solution:
                 case "(" | "{" | "[":
                     stack.append(c)
                 # check the closing parenthesis
-                case ")" if stack and stack[-1] in ["("]:
-                    stack.pop()
-                case "}" if stack and stack[-1] in ["{"]:
-                    stack.pop()
-                case "]" if stack and stack[-1] in ["["]:
+                case ")" | "}" | "]" if stack and stack[-1] == mapping[c]:
                     stack.pop()
                 # otherwise, we must have missed the match
                 case _:
