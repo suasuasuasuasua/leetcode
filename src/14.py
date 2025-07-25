@@ -14,27 +14,21 @@ class Solution:
         # - i imagine that this is the _very_ naiive solution but it may be
         #   worth doing to see what can be improved
 
-        # sanity check if
-        # 1. the list is empty
-        # 2. any of the strings in the list are empty
-        if not strs or any(len(s) == 0 for s in strs):
-            return ""
-
-        # we should only check up to the smallest string in the list
-        min_n = min(len(s) for s in strs)
-        result = ""
-        # loop over 0 -> min_n
-        for i in range(min_n):
-            # grab the current characters from all of the strings at the same
-            # time using i
-            current_chars = set(s[i] for s in strs)
-
-            # ensure that the length is 1, meaning that all the elements at
-            # index i are the same, meaning that they share a prefix still
-            if len(current_chars) == 1:
-                # add it to the result string
-                result += list(current_chars)[0]
+        prefix = ""
+        # clever trick to group the all the strings together character by
+        # character. no need to make huge for loop and check size of list
+        #
+        # for example, if strs = ["abc", "defg"],
+        # zip(*strs) = [("a","d"), ("b", "e"), ("c", "f")]
+        for cs in zip(*strs):
+            # if the set has size 1, then all the elements are the same and
+            # unique
+            if len(set(cs)) == 1:
+                # just grab the first character, they're all the same
+                prefix += cs[0]
+            # stop! we have no more common prefixes since there are different
+            # elements in the set
             else:
                 break
 
-        return result
+        return prefix
