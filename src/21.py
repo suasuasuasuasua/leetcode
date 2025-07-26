@@ -23,19 +23,19 @@ class Solution:
         # - else, we can just add x1 by default
 
         head = None
-        if list1 and list2:
-            if list1.val <= list2.val:
+        match list1, list2:
+            case ListNode(val=val1), ListNode(val=val2) if val1 <= val2:
                 head = list1
                 list1 = list1.next
-            else:
+            case ListNode(val=val1), ListNode(val=val2) if val1 > val2:
                 head = list2
                 list2 = list2.next
-        elif list1 and not list2:
-            head = list1
-            list1 = list1.next
-        elif not list1 and list2:
-            head = list2
-            list2 = list2.next
+            case ListNode(), None:
+                head = list1
+                list1 = list1.next
+            case None, ListNode():
+                head = list2
+                list2 = list2.next
 
         # we should loop while both of the lists are non-empty
         curr = head
@@ -52,9 +52,10 @@ class Solution:
 
         # add the rest of whichever list is remaining
         # the _rest_ should have elements larger than the current list
-        if curr and list1:
-            curr.next = list1
-        elif curr and list2:
-            curr.next = list2
+        match list1, list2:
+            case ListNode(), None if curr:
+                curr.next = list1
+            case None, ListNode() if curr:
+                curr.next = list2
 
         return head
