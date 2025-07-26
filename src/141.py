@@ -24,16 +24,11 @@ class Solution:
         # begin with the assumption that there is no cycle
         fast = head
 
-        while head and fast:
+        while fast and fast.next:
             # attempt to move the pointers
             # slow moves one `next`
             head = head.next
-            try:
-                # fast moves by two `next`
-                # NOTE: this could throw an exception
-                fast = fast.next.next
-            except AttributeError:
-                return False
+            fast = fast.next.next
 
             # if these two pointers are ever the same, then there is a cycle
             if head == fast:
