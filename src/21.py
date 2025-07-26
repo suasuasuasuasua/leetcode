@@ -39,11 +39,13 @@ class Solution:
 
         # add the rest of whichever list is remaining
         # the _rest_ should have elements larger than the current list
-        match list1, list2:
-            case ListNode(), None if curr:
-                curr.next = list1
-            case None, ListNode() if curr:
-                curr.next = list2
+        # NOTE: really elegant way to set the rest of the list
+        #       at the end of the while loop, one of list1 or list2 will be
+        #       empty, but not both
+        #
+        #       moreover, if list1 and list2 are both empty, this won't do
+        #       anything
+        curr.next = list1 or list2
 
         # since the head is just an empty ListNode, grab the next one!
         return head.next
