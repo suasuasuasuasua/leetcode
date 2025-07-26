@@ -30,12 +30,14 @@ class Solution:
             match list1.val, list2.val:
                 case x1, x2 if x1 <= x2:
                     curr.next = list1
-                    list1, curr = list1.next, list1
+                    list1 = list1.next
                 case x1, x2 if x1 > x2:
                     curr.next = list2
-                    list2, curr = list2.next, list2
+                    list2 = list2.next
                 case _:
                     print("Something has gone horribly wrong!")
+
+            curr = curr.next
 
         # add the rest of whichever list is remaining
         # the _rest_ should have elements larger than the current list
