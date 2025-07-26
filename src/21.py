@@ -22,23 +22,10 @@ class Solution:
         # - if x1 is greater than x2, then add x2 and advance the linked list
         # - else, we can just add x1 by default
 
-        head = None
-        match list1, list2:
-            case ListNode(val=val1), ListNode(val=val2) if val1 <= val2:
-                head = list1
-                list1 = list1.next
-            case ListNode(val=val1), ListNode(val=val2) if val1 > val2:
-                head = list2
-                list2 = list2.next
-            case ListNode(), None:
-                head = list1
-                list1 = list1.next
-            case None, ListNode():
-                head = list2
-                list2 = list2.next
+        # Create a new node instead of trying to find the smallest element
+        head = curr = ListNode()
 
         # we should loop while both of the lists are non-empty
-        curr = head
         while list1 and list2:
             match list1.val, list2.val:
                 case x1, x2 if x1 <= x2:
@@ -58,4 +45,5 @@ class Solution:
             case None, ListNode() if curr:
                 curr.next = list2
 
-        return head
+        # since the head is just an empty ListNode, grab the next one!
+        return head.next
