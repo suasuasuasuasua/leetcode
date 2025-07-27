@@ -6,6 +6,9 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    # global var that tracks the maximum diameter
+    diameter: int = 0
+
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         # problem
         # given the root of a binary tree, calculate the diameter of the binary
@@ -27,23 +30,19 @@ class Solution:
             if not root:
                 return depth
 
-            return 1 + max(
-                calculate_depth(root.left, depth), calculate_depth(root.right, depth)
-            )
+            # the diameter is the max of the current depth and whatever diameter we
+            # find in the left and right children of the current node
+            left_height = calculate_depth(root.left, depth)
+            right_height = calculate_depth(root.right, depth)
+            self.diameter = max(self.diameter, left_height + right_height)
+
+            return 1 + max(left_height, right_height)
 
         # base case
         if not root:
             return 0
 
-        # compute the left and right maximum depth
-        left_depth = calculate_depth(root.left, 0)
-        right_depth = calculate_depth(root.right, 0)
-        cur_depth = left_depth + right_depth
+        # run the
+        calculate_depth(root, 0)
 
-        # the diameter is the max of the current depth and whatever diameter we
-        # find in the left and right children of the current node
-        return max(
-            cur_depth,
-            self.diameterOfBinaryTree(root.left),
-            self.diameterOfBinaryTree(root.right),
-        )
+        return self.diameter
