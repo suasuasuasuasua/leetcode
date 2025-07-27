@@ -6,6 +6,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    balanced = True
+
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         # problem
         # given the root of a binary tree, determine if it is height balanced
@@ -18,23 +20,27 @@ class Solution:
         #
         # solution
         # we should traverse the tree in pre-order and check that the difference
-        # in heights are less than equal to 1
+        # in depths are less than equal to 1
         #
         # we also need to ensure this property for the left and right subtrees
-        def check_height(root: Optional[TreeNode]) -> int:
+        def dfs(root: Optional[TreeNode]) -> int:
             if not root:
                 return 0
 
-            return 1 + max(check_height(root.left), check_height(root.right))
+            left_height = dfs(root.left)
+            right_height = dfs(root.right)
+            # if the difference in height are ever greater than 1, then that
+            # means that the binary trees are not balanced
+            if abs(left_height - right_height) > 1:
+                self.balanced = False
+                return 0
+
+            # compute the depth of the binary tree
+            return 1 + max(left_height, right_height)
 
         if not root:
             return True
+        dfs(root)
 
-        left_height = check_height(root.left)
-        right_height = check_height(root.right)
-
-        return (
-            abs(left_height - right_height) <= 1
-            and self.isBalanced(root.left)
-            and self.isBalanced(root.right)
-        )
+        # return the final result
+        return self.balanced
