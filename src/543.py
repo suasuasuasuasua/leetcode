@@ -27,14 +27,14 @@ class Solution:
         # global var that tracks the maximum diameter
         diameter = 0
 
-        def calculate_depth(root: Optional[TreeNode], depth: int) -> int:
+        def calculate_depth(root: Optional[TreeNode]) -> int:
             if not root:
-                return depth
+                return 0
 
             # the diameter is the max of the current depth and whatever diameter we
             # find in the left and right children of the current node
-            left_height = calculate_depth(root.left, depth)
-            right_height = calculate_depth(root.right, depth)
+            left_height = calculate_depth(root.left)
+            right_height = calculate_depth(root.right)
             nonlocal diameter
             diameter = max(diameter, left_height + right_height)
 
@@ -45,6 +45,6 @@ class Solution:
             return 0
 
         # run the
-        calculate_depth(root, 0)
+        calculate_depth(root)
 
         return diameter
