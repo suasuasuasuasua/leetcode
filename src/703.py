@@ -25,12 +25,40 @@ class KthLargest:
     #   this can be achieved using a queue structure
 
     def __init__(self, k: int, nums: List[int]):
+        # track the kth element
         self.k = k
-        self.heap = []
-        for num in nums:
-            self.add(num)
 
-    def add(self, val: int) -> int: ...
+        # initialize the heap using the heapq module.
+        # heapify is a helper function that sorts an array in O(n) time complexity
+        # into the heap structure.
+        #
+        # the way that heapify works is by working backwards through the array
+        # and swapping elements to satisfy the heap rules
+        self.heap = nums
+        heapq.heapify(self.heap)
+
+        # maintain only the k largest elements - there will be performance issues
+        # if we are carry around all the numbers
+        # note that this will not do anything if
+        while len(self.heap) > k:
+            heapq.heappop(self.heap)
+
+    def add(self, val: int) -> int:
+        # push the value onto the heap
+        heapq.heappush(self.heap, val)
+
+        # pushing that value may make the heap too large (more than k elements)
+        # if so, we need to pop off the smallest element (min-heap property)
+        #
+        # NOTE: this is not >= because the kth number is 0 indexed
+        if len(self.heap) > self.k:
+            heapq.heappop(self.heap)
+
+        # heap[0] is the smallest element (min-heap property)
+        #
+        # NOTE: this never throws an index bound because `val` will always add
+        # an element to the heap. `k` is also a non-negative number
+        return self.heap[0]
 
 
 # Your KthLargest object will be instantiated and called as such:
