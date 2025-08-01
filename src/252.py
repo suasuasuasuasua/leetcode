@@ -1,0 +1,47 @@
+# https://neetcode.io/problems/meeting-schedule?list=neetcode150
+"""
+Definition of Interval:
+class Interval(object):
+    def __init__(self, start, end):
+        self.start = start
+        self.end = end
+"""
+
+
+class Solution:
+    def canAttendMeetings(self, intervals: List[Interval]) -> bool:
+        # problem
+        # given an array of meeting time intervals, determine if a person can add
+        # _all_ of the meetings to their schedule without any conflicts
+        #
+        # solution
+        # we need to ensure that these ranges are disjoint of one another
+
+        # start by sorting the intervals by the start time
+        intervals = sorted(intervals, key=lambda a: a.start)
+
+        # if the interval list is empty, then we can trivially add _all_ of the
+        # meetinsg to the schedule
+        if not intervals:
+            return True
+
+        # track the previous interval
+        prev = intervals[0]
+        # loop through the rest of the sorted intervals
+        for interval in intervals[1:]:
+            pstart, pend = prev.start, prev.end
+            qstart, qend = interval.start, interval.end
+
+            # ensure that
+            # - the previous start <= current start
+            # - the previous start <= current end
+            # - the previous end <= current end
+            # - the previous end <= current start
+            if not (
+                pstart <= qstart and pstart <= qend and pend <= qstart and pend <= qend
+            ):
+                return False
+
+            prev = interval
+
+        return True
