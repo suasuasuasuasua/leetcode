@@ -29,17 +29,8 @@ class Solution:
         prev = intervals[0]
         # loop through the rest of the sorted intervals
         for interval in intervals[1:]:
-            pstart, pend = prev.start, prev.end
-            qstart, qend = interval.start, interval.end
-
-            # ensure that
-            # - the previous start <= current start
-            # - the previous start <= current end
-            # - the previous end <= current end
-            # - the previous end <= current start
-            if not (
-                pstart <= qstart and pstart <= qend and pend <= qstart and pend <= qend
-            ):
+            # ensure that the previous end is less than the current start
+            if prev.end > interval.start:
                 return False
 
             prev = interval
