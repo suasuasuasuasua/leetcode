@@ -1,0 +1,17 @@
+name: formatter
+on: [push, pull_request]
+jobs:
+    black:
+        name: runner / black formatter
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: rickstaa/action-black@v1
+              with:
+                  black_args: ". --check"
+    isort:
+        name: runner / black formatter
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: isort/isort-action@v1
