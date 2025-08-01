@@ -3,7 +3,7 @@ on: [push, pull_request]
 jobs:
     black:
         name: runner / black formatter
-        runs-on: ubuntu-latest:docker://node:18-bullseye
+        runs-on: lab:ubuntu-latest
         steps:
             - uses: actions/checkout@v4
             - uses: actions/setup-python@v5
