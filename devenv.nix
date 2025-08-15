@@ -4,6 +4,7 @@
   packages = with pkgs; [
     git
     nil
+    python313Packages.ipython
     python313Packages.python-lsp-server
   ];
 
