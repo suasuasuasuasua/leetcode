@@ -20,13 +20,23 @@ class Solution:
             elif num > largest:
                 largest = num
 
-        result = 1
-        # loop over numbers starting from the smallest
-        # use the inclusive range (+1)
-        for i in range(2, smallest+1):
-            # update the result iff the smallest and largest numbers are evenly
-            # divisble, i.e. the modulo (remainder) is equal to 0
-            if smallest % i == 0 and largest % i == 0:
-                result = i
-            
-        return result
+        def gcd(a: int, b: int) -> int:
+            """Euclid's algorithm for greatest common divisors
+
+            See:
+                https://en.wikipedia.org/wiki/Euclidean_algorithm
+
+            Args:
+                a: the first number
+                b: the second number
+
+            Returns:
+                the greatest common divisor
+            """
+            # track the remainder at each step
+            while r := a % b:
+                a, b = b, r
+
+            return b
+
+        return gcd(smallest, largest)
