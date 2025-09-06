@@ -1,10 +1,15 @@
 # https://leetcode.com/problems/same-tree/
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+from typing import Optional
+
+
+class TreeNode:
+    # Definition for a binary tree node.
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         # problem
@@ -39,7 +44,8 @@ class Solution:
                     # check that the node values are the same
                     # also continue checking the left and right nodes recursively
                     return (
-                        p.val == q.val and dfs(p.left, q.left) and dfs(p.right, q.right)
+                        p.val == q.val and dfs(
+                            p.left, q.left) and dfs(p.right, q.right)
                     )
 
         return dfs(p, q)

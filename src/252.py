@@ -1,11 +1,12 @@
 # https://neetcode.io/problems/meeting-schedule?list=neetcode150
-"""
-Definition of Interval:
+from typing import List
+
+
 class Interval(object):
+    # Definition of Interval:
     def __init__(self, start, end):
         self.start = start
         self.end = end
-"""
 
 
 class Solution:

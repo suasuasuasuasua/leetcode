@@ -1,4 +1,7 @@
 # https://leetcode.com/problems/valid-anagram/description/
+from collections import defaultdict
+
+
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         # the problem is check if `s` and `t` are anagrams of each other

@@ -1,4 +1,7 @@
 # https://leetcode.com/problems/find-greatest-common-divisor-of-array/description/
+from typing import List
+
+
 class Solution:
     def findGCD(self, nums: List[int]) -> int:
         # problem

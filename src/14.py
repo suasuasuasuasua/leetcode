@@ -1,4 +1,7 @@
 # https://leetcode.com/problems/longest-common-prefix/description/
+from typing import List
+
+
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         # the problem is about returning the longest common prefix from a list
