@@ -22,6 +22,8 @@ add_executable(twoSum 1.cpp)
 add_executable(groupAnagrams 49.cpp)
 add_executable(hasDuplicate 217.cpp)
 add_executable(isAnagram 242.cpp)
+add_executable(topKFrequent 347.cpp)
 
 target_link_libraries(twoSum fmt::fmt)
 target_link_libraries(groupAnagrams fmt::fmt)
+target_link_libraries(topKFrequent fmt::fmt)
