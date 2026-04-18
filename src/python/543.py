@@ -11,7 +11,6 @@ class TreeNode:
 
 
 class Solution:
-
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         # problem
         # given the root of a binary tree, calculate the diameter of the binary

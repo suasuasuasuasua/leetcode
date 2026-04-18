@@ -26,7 +26,7 @@ class Solution:
 
             # if we can't find the diff in the mapping, that means we haven't
             # tracked the corresponding number yet
-            if not diff in mapping:
+            if diff not in mapping:
                 # save the index
                 mapping[num] = i
             # if the diff is present in the dictionary, then we have found two

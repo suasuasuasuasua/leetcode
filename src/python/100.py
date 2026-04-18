@@ -44,8 +44,7 @@ class Solution:
                     # check that the node values are the same
                     # also continue checking the left and right nodes recursively
                     return (
-                        p.val == q.val and dfs(
-                            p.left, q.left) and dfs(p.right, q.right)
+                        p.val == q.val and dfs(p.left, q.left) and dfs(p.right, q.right)
                     )
 
         return dfs(p, q)
