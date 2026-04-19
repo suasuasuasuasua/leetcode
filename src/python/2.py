@@ -17,8 +17,8 @@ class Solution:
         # problem
         # given two linked lists where the nodes are stored in reverse order,
         # return the sum as a linked list
-        def traverse(l: Optional[ListNode]) -> int:
-            head = l
+        def traverse(ll: Optional[ListNode]) -> int:
+            head = ll
 
             # track the running sum
             result = 0

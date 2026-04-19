@@ -1,0 +1,31 @@
+name: Format Check
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "treefmt.nix"
+      - "flake.nix"
+      - "flake.lock"
+  pull_request:
+    paths:
+      - "src/**"
+      - "treefmt.nix"
+      - "flake.nix"
+      - "flake.lock"
+
+jobs:
+  format:
+    name: treefmt
+    runs-on: ubuntu-latest
+    container:
+      image: nixpkgs/nix-flakes
+
+    steps:
+      - name: Checkout
+        run: |
+          git clone --depth=1 --branch "${{ gitea.head_ref || gitea.ref_name }}" \
+            "${{ gitea.server_url }}/${{ gitea.repository }}.git" .
+
+      - name: Check formatting
+        run: nix fmt -- --fail-on-change src/

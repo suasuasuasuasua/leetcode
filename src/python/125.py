@@ -16,18 +16,18 @@ class Solution:
 
         # instead of check if the whole string is equal, use two pointers from
         # the left and right
-        l, r = 0, len(s) - 1
-        while l <= r:
+        left, right = 0, len(s) - 1
+        while left <= right:
             # grab the character at the current pointer and
-            sl = s[l].lower()
-            sr = s[r].lower()
+            sl = s[left].lower()
+            sr = s[right].lower()
             # if the character at the pointers are not equal, then this is not
             # a palindrome
             if sl != sr:
                 return False
 
             # NOTE: always remember to increment and decrement the pointers!
-            l += 1
-            r -= 1
+            left += 1
+            right -= 1
 
         return True
