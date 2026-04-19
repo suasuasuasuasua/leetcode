@@ -31,12 +31,13 @@ public:
 
 int main(int argc, char *argv[]) {
   Solution s;
-  std::vector<std::pair<std::pair<std::vector<int>, int>, std::vector<int>>>
-      tests = {
-          {{{3, 4, 5, 6}, 7}, {0, 1}},
-          {{{4, 5, 6}, 10}, {0, 2}},
-          {{{5, 5}, 10}, {0, 1}},
-      };
+  using inputs_t = std::pair<std::vector<int>, int>;
+  using outputs_t = std::vector<int>;
+  std::vector<std::pair<inputs_t, outputs_t>> tests = {
+      {{{3, 4, 5, 6}, 7}, {0, 1}},
+      {{{4, 5, 6}, 10}, {0, 2}},
+      {{{5, 5}, 10}, {0, 1}},
+  };
 
   for (auto &[test, expected] : tests) {
     auto &[nums, target] = test;

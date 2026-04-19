@@ -21,7 +21,9 @@ public:
 
 int main(int argc, char *argv[]) {
   Solution s;
-  std::vector<std::pair<std::vector<int>, bool>> tests = {
+  using inputs_t = std::vector<int>;
+  using outputs_t = bool;
+  std::vector<std::pair<inputs_t, outputs_t>> tests = {
       {{1, 2, 3, 3}, true},
       {{1, 2, 3, 4}, false},
   };

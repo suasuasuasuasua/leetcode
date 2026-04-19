@@ -62,8 +62,9 @@ public:
 
 int main(int argc, char *argv[]) {
   Solution s;
-
-  std::vector<std::pair<std::vector<int>, std::vector<int>>> tests = {
+  using inputs_t = std::vector<int>;
+  using outputs_t = std::vector<int>;
+  std::vector<std::pair<inputs_t, outputs_t>> tests = {
       {{1, 2, 3, 4}, {24, 12, 8, 6}},
       {{-1, 1, 0, -3, 3}, {0, 0, 9, 0, 0}},
       {{1, 2, 4, 6}, {48, 24, 12, 8}},

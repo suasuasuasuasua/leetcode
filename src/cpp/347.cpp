@@ -55,13 +55,14 @@ public:
 
 int main(int argc, char *argv[]) {
   Solution s;
-  std::vector<std::pair<std::pair<std::vector<int>, int>, std::vector<int>>>
-      tests = {
-          {{{1, 2, 2, 3, 3, 3}, 2}, {2, 3}},
-          {{{1, 1, 1, 2, 2, 3}, 2}, {2, 1}},
-          {{{1, 1, 1, 2, 2, 2, 3, 3, 3}, 3}, {1, 2, 3}},
-          {{{7, 7}, 1}, {7}},
-      };
+  using inputs_t = std::pair<std::vector<int>, int>;
+  using outputs_t = std::vector<int>;
+  std::vector<std::pair<inputs_t, outputs_t>> tests = {
+      {{{1, 2, 2, 3, 3, 3}, 2}, {2, 3}},
+      {{{1, 1, 1, 2, 2, 3}, 2}, {2, 1}},
+      {{{1, 1, 1, 2, 2, 2, 3, 3, 3}, 3}, {1, 2, 3}},
+      {{{7, 7}, 1}, {7}},
+  };
 
   for (auto &[test, expected] : tests) {
     auto &[nums, target] = test;

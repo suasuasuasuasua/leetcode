@@ -45,14 +45,14 @@ public:
 
 int main(int argc, char *argv[]) {
   Solution s;
-  std::vector<std::pair<std::vector<std::string>,
-                        std::vector<std::vector<std::string>>>>
-      tests = {
-          {{"act", "pots", "tops", "cat", "stop", "hat"},
-           {{"pots", "tops", "stop"}, {"hat"}, {"act", "cat"}}},
-          {{"x"}, {{"x"}}},
-          {{""}, {{""}}},
-      };
+  using inputs_t = std::vector<std::string>;
+  using outputs_t = std::vector<std::vector<std::string>>;
+  std::vector<std::pair<inputs_t, outputs_t>> tests = {
+      {{"act", "pots", "tops", "cat", "stop", "hat"},
+       {{"pots", "tops", "stop"}, {"hat"}, {"act", "cat"}}},
+      {{"x"}, {{"x"}}},
+      {{""}, {{""}}},
+  };
 
   for (auto &[test, expected] : tests) {
     auto result = s.groupAnagrams(test);

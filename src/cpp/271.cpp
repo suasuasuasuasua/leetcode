@@ -49,7 +49,8 @@ public:
 
 int main(int argc, char *argv[]) {
   Solution s;
-  std::vector<std::vector<std::string>> tests = {
+  using inputs_t = std::vector<std::string>;
+  std::vector<inputs_t> tests = {
       {"Hello", "World"},
       {"abc123", "456def"},
       {"0"},

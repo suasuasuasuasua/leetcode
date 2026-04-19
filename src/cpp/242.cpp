@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+
 class Solution {
 public:
   bool isAnagram(std::string s, std::string t) {
@@ -22,7 +23,9 @@ public:
 
 int main(int argc, char *argv[]) {
   Solution s;
-  std::vector<std::pair<std::pair<std::string, std::string>, bool>> tests = {
+  using inputs_t = std::pair<std::string, std::string>;
+  using outputs_t = bool;
+  std::vector<std::pair<inputs_t, outputs_t>> tests = {
       {{"s", "nagaram"}, false},
       {{"rat", "car"}, false},
   };
