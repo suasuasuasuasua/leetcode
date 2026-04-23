@@ -3,29 +3,27 @@ name: Format Check
 on:
   push:
     paths:
+      - "**/*.yml"
+      - "flake.lock"
+      - "flake.nix"
       - "src/**"
       - "treefmt.nix"
-      - "flake.nix"
-      - "flake.lock"
   pull_request:
     paths:
+      - "**/*.yml"
+      - "flake.lock"
+      - "flake.nix"
       - "src/**"
       - "treefmt.nix"
-      - "flake.nix"
-      - "flake.lock"
 
 jobs:
   format:
     name: treefmt
-    runs-on: ubuntu-latest
-    container:
-      image: nixpkgs/nix-flakes
-
+    runs-on: nix
     steps:
       - name: Checkout
-        run: |
-          git clone --depth=1 --branch "${{ gitea.head_ref || gitea.ref_name }}" \
-            "${{ gitea.server_url }}/${{ gitea.repository }}.git" .
-
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # required for `nix flake show`
       - name: Check formatting
-        run: nix fmt -- --fail-on-change src/
+        run: nix develop --command nix fmt -- --fail-on-change src/
