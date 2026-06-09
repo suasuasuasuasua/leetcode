@@ -5,17 +5,13 @@
 class Solution {
 public:
   int largestRectangleArea(std::vector<int> &heights) {
-    // the largest rectangle can be calculated in two ways
-    //
-    // 1. it is either going to be the largest value in the array
-    // 2. or, it's going to be a rectangle spanned over the bars
-
     // use a monotonically ascending stack to find the largest left and
     // rightmost bounds possible
     //
     // a monotonically ascending stack looks like in histogram form
-    //
-    //          []    <- can no longer be extended right (width=4-3, area=4*1)
+    //          []    <- can no longer be extended right (width=4-3, area=6*1)
+    //          []       will be "extended into" by previous rectangles beause
+    //          []       they must by definition be less than
     //       [] []    <- same here (width=4-2, area=3*2)
     //    [] [] [] []
     // [] [] [] [] []
@@ -28,6 +24,7 @@ public:
       int height = heights.at(i);
 
       // repeatedly pop off the stack while the current element is the smallest
+      //
       // this means that the height can no longer be extended to the right, and
       // it should just be considered in isolation
       while (!s.empty() && height < s.top().second) {
@@ -44,6 +41,7 @@ public:
     }
 
     // these heights must have extended to the end of the histogram.
+    //
     // the width is the difference between the length of the numbers array and
     // the index, while the height is simply the height value
     while (!s.empty()) {
