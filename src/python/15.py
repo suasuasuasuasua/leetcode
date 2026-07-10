@@ -5,38 +5,30 @@ class Solution:
         # outputs:
         #   return all the triplets where i != j != j
         #          and nums[i] + nums[j] + nums[k] == 0
-        results = set()
 
-        # track fixed values that have already been seen/processed
-        used_fixed = set()
-        # fix an iterator number
-        for fixed in range(len(nums)):
-            fixed_num = nums[fixed]
-            if fixed_num in used_fixed:
-                continue
-            target = -fixed_num  # a + b + c = 0 -> b + c = -a
-            # run two sum algorithm on middle and right
-            # the goal is to add up to 0
-            seen = dict()
-            # start on the index after the fixed
-            for running in range(fixed + 1, len(nums)):
-                running_num = nums[running]
-                if running_num in seen and (
-                    fixed != seen[running_num]
-                    and fixed != running
-                    and seen[running_num] != running
-                ):
-                    # add a sorted tuple to the set to prevent duplicates
-                    results.add(
-                        tuple(
-                            sorted(
-                                (nums[fixed], nums[seen[running_num]], nums[running])
-                            )
-                        )
-                    )
-                diff = target - running_num
-                seen[diff] = running
+        result = set()
 
-            used_fixed.add(fixed_num)
+        # first sort the array
+        nums = sorted(nums)
 
-        return list(list(r) for r in results)
+        # second, run the fixed looked up algorithm
+        for fixed, fixed_num in enumerate(nums):
+            # a + b + c = 0
+            # b + c = -a
+            target = -fixed_num
+
+            left = fixed + 1
+            right = len(nums) - 1
+            while left < right:
+                curr_sum = nums[left] + nums[right]
+                if curr_sum == target:
+                    result.add(tuple(sorted([fixed_num, nums[left], nums[right]])))
+                    left += 1
+                    right -= 1
+                    continue
+                elif curr_sum < target:
+                    left += 1
+                else:
+                    right -= 1
+
+        return [list(r) for r in result]
