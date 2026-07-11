@@ -7,6 +7,13 @@
 
 **Language:** **Python** (fewer syntax fights, more escape hatches under time pressure). Note: this repo is currently C++ (`src/cpp/`), but interview in Python.
 
+## Progress log
+
+- **Sat Jul 11 (~2.5 hr):** Finished 125, 167, 15. Solved 3Sum twice (hashmap
+  \+ textbook sorted two-pointer); nailed the duplicate-skip reasoning and O(n²)
+  optimality. **Stopped before 11 Container With Most Water** — pick up there
+  next session (good warmup before Sun's Binary Search + Linked List).
+
 ## What they actually grade (from the prep PDF)
 
 1. **Clarifying questions** — never dive straight into code. Restate the problem, ask about input size, edge cases, duplicates, empty input, sorted-ness.
