@@ -11,7 +11,45 @@
 
 - **Fri Jul 10 (~2.5 hr):** Early start! Finished 125, 167, 15. Solved 3Sum twice (hashmap + textbook sorted two-pointer); nailed the duplicate-skip reasoning and O(n²) optimality. Stopped before 11 Container With Most Water.
 - **Sat Jul 11:** Rest day (hiking + time with girlfriend) — recovery is part of the plan.
-- **Next up (Sun Jul 12):** 11 as a warmup, then Sliding Window + Binary Search. Schedule re-vectored below to absorb the Sat rest day with zero spillover into Week 2.
+- **Sun Jul 12 (full day):** Finished Sliding Window + Binary Search. Binary search was the grind — 33 took a while to see the two-level "which half is sorted" decision, and 875 was ~40 min (20 staring, 20 on edge cases). Came out with a clear Flavor A vs Flavor B mental model. See "Binary Search — lessons learned" below. Made Anki cards.
+- **Next up (Mon Jul 13):** Linked List.
+
+## Lessons learned — patterns that fought back
+
+### Binary Search (Sun Jul 12) — the big grind
+
+**Flavor A vs Flavor B (the key mental model).** Recognize which one you're in *before* coding:
+
+- **Flavor A — find an exact target** (704, 33): loop `while low <= high`, `return mid` on a hit, may return `-1` for not-found.
+- **Flavor B — converge on a boundary** (153, 875, and 1011/410/1482): loop `while low < high`, *no* early return, predicate is monotonic (`F F F T T T`), fall out with `low == high` on the flip. No not-found case — the answer always exists in range. The tell: **there's no target to match; you're locating where a yes/no property changes.**
+
+**33 Search in Rotated — the two-level decision.** The bug that ate the most time: collapsing "which half is sorted?" and "is the target in it?" into one `if`. It's *two* steps:
+
+1. First prove which half is the clean sorted run: `if nums[low] <= nums[mid]:` → left is sorted; else → right is sorted.
+2. *Only inside the known-sorted half*, range-check the target (inclusive both ends) to decide which way to go.
+   - The `<=` in step 1 is load-bearing: when the window is 1–2 elements, `mid == low`, so `nums[low] == nums[mid]`; strict `<` misroutes it.
+   - Rotation direction (left vs right) doesn't matter — "one half is always a clean sorted run" holds for any rotation.
+
+**875 Koko — binary search on the *answer space*, not the array.** The flip that unlocked it: stop searching the piles; search over candidate eating speeds `k`. Recipe for this whole family:
+
+1. **Domain:** what value am I searching over? Here `k ∈ [1, max(piles)]`. Start `low = 1` (not 0) — the true minimum domain removes the divide-by-zero guard entirely.
+2. **Predicate:** a *computable* monotonic yes/no using data I already have — `feasible(k)` = `sum(ceil(pile / k) for pile) <= h`. The `ceil` is the edge case (she can't share an hour across piles).
+3. **Converge:** `feasible` on `mid` → `high = mid`; else `low = mid + 1`; `return low`. No running-min/`result` var needed — the invariants (`high` always feasible, everything `< low` infeasible) make `low` the answer.
+
+**153 Find Min — the predicate must be computable, and the anchor matters.**
+
+- Don't phrase the predicate as "is this right of the pivot?" — that's circular (the pivot is what you're finding). Make it a real comparison: **`nums[mid] <= nums[high]`**. First `True` = the minimum.
+- Anchor on `nums[high]`, *not* `nums[low]`: `nums[high]` always sits in the run containing the min, so the `F...F T...T` shape survives even the not-rotated edge case. Anchoring on `low` breaks on an already-sorted array.
+- Generalizable recipe: **(1) domain, (2) computable monotonic predicate — never the answer itself, (3) pick the anchor/direction that survives the edge cases.**
+
+### Sliding Window (Sun Jul 12) — smoother, a few patches
+
+Less painful than binary search; the fixes were mostly about *when* to update state, not the core idea.
+
+- **424 Longest Repeating Char Replacement — record-after-shrink gotcha.** Update the answer at the right moment relative to shrinking the window. Optimization: track a running `max_freq` instead of recomputing the most-common char each step (you don't even need to decrease it — the window never shrinks below the best seen).
+- **567 Permutation in String — fixed-size window.** Slide a window the size of the pattern and compare counts. Patch (`fix(567)`): **incrementally update the count on slide** (add the entering char, remove the leaving one) instead of rebuilding the frequency map every step.
+- **3 Longest Substring w/o Repeat.** The O(n) set-walk works; optional follow-up is the last-seen-index jump to move `left` in one hop instead of shrinking one char at a time.
+- **Takeaway:** most sliding-window bugs are *timing* — where in the loop you record the answer vs. grow vs. shrink. Decide that order deliberately up front.
 
 ## What they actually grade (from the prep PDF)
 
@@ -73,11 +111,11 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
   - [x] [424 Longest Repeating Char Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) (record-after-shrink gotcha; opt: running max_freq)
   - [x] [567 Permutation in String](https://leetcode.com/problems/permutation-in-string/) (fixed-size window; opt: incremental slide vs rebuild)
 - Binary Search:
-  - [ ] [704 Binary Search](https://leetcode.com/problems/binary-search/) (nail the template)
-  - [ ] [74 Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
-  - [ ] [153 Find Min in Rotated](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
-  - [ ] [33 Search in Rotated](https://leetcode.com/problems/search-in-rotated-sorted-array/) ← common
-  - [ ] [875 Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) (search on answer space)
+  - [x] [704 Binary Search](https://leetcode.com/problems/binary-search/) (nail the template — mid computed at top of loop)
+  - [x] [74 Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/) (nested search works; cleaner: flatten index mid//n, mid%n)
+  - [x] [153 Find Min in Rotated](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/) (canonical: compare nums[mid] vs nums[high], high=mid, while low<high, no running-min)
+  - [x] [33 Search in Rotated](https://leetcode.com/problems/search-in-rotated-sorted-array/) ← common
+  - [x] [875 Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) (search on answer space)
 - Stretch: [ ] [42 Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) · [ ] [76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
 
 #### Mon Jul 13 (AM) — Linked List
