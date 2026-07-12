@@ -12,14 +12,19 @@ class Solution:
 
         # "slide" a window over s2 to scan for the permutations
         left, right = 0, len(s1)
+        s2_substr = s2[left:right]
+        s2_counter = Counter(s2_substr)
         while right <= len(s2):
             # consider each substring in s2'
-            s2_counter = Counter(s2[left:right])
-
             if s1_counter == s2_counter:
                 return True
 
+            # slide left bound, drop the element
+            s2_counter[s2[left]] -= 1
             left += 1
+            # slide right bound, increment the element
+            if right < len(s2):
+                s2_counter[s2[right]] += 1
             right += 1
 
         return False
