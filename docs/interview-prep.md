@@ -9,10 +9,9 @@
 
 ## Progress log
 
-- **Sat Jul 11 (~2.5 hr):** Finished 125, 167, 15. Solved 3Sum twice (hashmap
-  \+ textbook sorted two-pointer); nailed the duplicate-skip reasoning and O(n²)
-  optimality. **Stopped before 11 Container With Most Water** — pick up there
-  next session (good warmup before Sun's Binary Search + Linked List).
+- **Fri Jul 10 (~2.5 hr):** Early start! Finished 125, 167, 15. Solved 3Sum twice (hashmap + textbook sorted two-pointer); nailed the duplicate-skip reasoning and O(n²) optimality. Stopped before 11 Container With Most Water.
+- **Sat Jul 11:** Rest day (hiking + time with girlfriend) — recovery is part of the plan.
+- **Next up (Sun Jul 12):** 11 as a warmup, then Sliding Window + Binary Search. Schedule re-vectored below to absorb the Sat rest day with zero spillover into Week 2.
 
 ## What they actually grade (from the prep PDF)
 
@@ -56,62 +55,63 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 
 ### Week 1 — core patterns (Tier 1)
 
-#### Sat Jul 11 (full day) — Two Pointers + Sliding Window
+#### Fri Jul 10 (done ✅) — Two Pointers (early start)
 
-- Two Pointers:
-  - [x] [125 Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
-  - [x] [167 Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
-  - [x] [15 3Sum](https://leetcode.com/problems/3sum/) ← common
-  - [ ] [11 Container With Most Water](https://leetcode.com/problems/container-with-most-water/)
+- [x] [125 Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+- [x] [167 Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/)
+- [x] [15 3Sum](https://leetcode.com/problems/3sum/) ← common
+
+#### Sat Jul 11 — REST 🥾 (hiking + girlfriend; recovery is part of the plan)
+
+#### Sun Jul 12 (full day) — Finish Two Pointers + Sliding Window + Binary Search
+
+- Finish Two Pointers:
+  - [x] [11 Container With Most Water](https://leetcode.com/problems/container-with-most-water/) (quick warmup)
 - Sliding Window:
-  - [ ] [121 Best Time to Buy/Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
-  - [ ] [3 Longest Substring w/o Repeat](https://leetcode.com/problems/longest-substring-without-repeating-characters/) ← common
-  - [ ] [424 Longest Repeating Char Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/)
-  - [ ] [567 Permutation in String](https://leetcode.com/problems/permutation-in-string/)
-- Stretch: [ ] [42 Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) · [ ] [76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
-
-#### Sun Jul 12 (full day) — Binary Search + Linked List
-
+  - [x] [121 Best Time to Buy/Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+  - [x] [3 Longest Substring w/o Repeat](https://leetcode.com/problems/longest-substring-without-repeating-characters/) ← common (O(n) set-walk done; last-seen-index jump = optional follow-up)
+  - [x] [424 Longest Repeating Char Replacement](https://leetcode.com/problems/longest-repeating-character-replacement/) (record-after-shrink gotcha; opt: running max_freq)
+  - [x] [567 Permutation in String](https://leetcode.com/problems/permutation-in-string/) (fixed-size window; opt: incremental slide vs rebuild)
 - Binary Search:
   - [ ] [704 Binary Search](https://leetcode.com/problems/binary-search/) (nail the template)
   - [ ] [74 Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
   - [ ] [153 Find Min in Rotated](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/)
   - [ ] [33 Search in Rotated](https://leetcode.com/problems/search-in-rotated-sorted-array/) ← common
   - [ ] [875 Koko Eating Bananas](https://leetcode.com/problems/koko-eating-bananas/) (search on answer space)
-- Linked List:
-  - [ ] [206 Reverse List](https://leetcode.com/problems/reverse-linked-list/) ← must be instant
-  - [ ] [21 Merge Two Sorted](https://leetcode.com/problems/merge-two-sorted-lists/)
-  - [ ] [19 Remove Nth From End](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
-  - [ ] [141 Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/) / [142 Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) (Floyd's)
-  - [ ] [2 Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
+- Stretch: [ ] [42 Trapping Rain Water](https://leetcode.com/problems/trapping-rain-water/) · [ ] [76 Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)
+
+#### Mon Jul 13 (AM) — Linked List
+
+- [ ] [206 Reverse List](https://leetcode.com/problems/reverse-linked-list/) ← must be instant
+- [ ] [21 Merge Two Sorted](https://leetcode.com/problems/merge-two-sorted-lists/)
+- [ ] [19 Remove Nth From End](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
+- [ ] [141 Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/) / [142 Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) (Floyd's)
+- [ ] [2 Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
 - Stretch: [ ] [143 Reorder List](https://leetcode.com/problems/reorder-list/)
 
-#### Mon Jul 13 (AM) — Trees, warmups
+#### Tue Jul 14 (AM) — Trees I (traversal)
 
 - [ ] [226 Invert](https://leetcode.com/problems/invert-binary-tree/)
 - [ ] [104 Max Depth](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 - [ ] [543 Diameter](https://leetcode.com/problems/diameter-of-binary-tree/)
-
-#### Tue Jul 14 (AM) — Trees, structure
-
 - [ ] [110 Balanced](https://leetcode.com/problems/balanced-binary-tree/)
+
+#### Wed Jul 15 (AM) — Trees II (structure + BFS)
+
 - [ ] [100 Same Tree](https://leetcode.com/problems/same-tree/) / [572 Subtree](https://leetcode.com/problems/subtree-of-another-tree/)
 - [ ] [235 LCA of a BST](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
-
-#### Wed Jul 15 (AM) — Trees, BFS/BST
-
 - [ ] [102 Level Order (BFS)](https://leetcode.com/problems/binary-tree-level-order-traversal/) ← must know
+
+#### Thu Jul 16 (AM) — Trees III (views + BST)
+
 - [ ] [199 Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
 - [ ] [98 Validate BST](https://leetcode.com/problems/validate-binary-search-tree/) ← common
-
-#### Thu Jul 16 (AM) — Trees finish + Heaps start
-
 - [ ] [230 Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 - [ ] [105 Build Tree from Pre/Inorder](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
-- [ ] [703 Kth Largest in Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
 
 #### Fri Jul 17 (AM) — Heaps
 
+- [ ] [703 Kth Largest in Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
 - [ ] [1046 Last Stone Weight](https://leetcode.com/problems/last-stone-weight/)
 - [ ] [215 Kth Largest Element](https://leetcode.com/problems/kth-largest-element-in-an-array/) (also learn quickselect) ← common
 - [ ] [973 K Closest Points](https://leetcode.com/problems/k-closest-points-to-origin/)

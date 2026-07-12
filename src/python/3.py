@@ -1,42 +1,22 @@
-# https://leetcode.com/problems/longest-substring-without-repeating-characters/
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        # problem
-        # given a string, find the longest substring that has all unique
-        # letters
-        #
-        # quirks
-        # sicne we are interested in substrings, not subsequences
-        #
-        # solution
-        # iterate through all possible substrings, keeping track of some maximum
-        # length encountered
-        #
-        # one approach is a sliding window where we keep track of some "base"
-        # we test substrings from the base index to some index i
-        # if the current substring is valid, then update the max length
-        # accordingly
-        # otherwise, we should increment the base index and continue the process
-        # to the end
+        left = right = 0
 
-        # start the base and maximum length at 0
-        base = max_length = 0
-
-        # iterate through the string and build substrings
-        # this will be _at worst_ O(n)
-        for i in range(len(s) + 1):
-            current = s[base:i]
-
-            # check if the substring has unique values
-            curr_length = len(current)
-            if len(set(current)) == curr_length:
-                # update the max length
-                max_length = max(max_length, curr_length)
-            # increment the base value to _walk_ across the string
-            # this preserves the "sliding window" effect
-            #
-            # base will lag some amount behind i, which is the max_length seen
+        result = 0
+        # track a running set to count characters for the substring
+        substr = set()
+        while right < len(s):
+            # check if the new character is already in the substring
+            # if it is, then advance the left bound
+            if s[right] in substr:
+                substr.remove(s[left])
+                left += 1
+            # else, grow the right hand side of the sliding window since we
+            # haven't seen the character yet
             else:
-                base += 1
+                substr.add(s[right])
+                right += 1
 
-        return max_length
+            result = max(result, len(substr))
+
+        return result
