@@ -66,7 +66,7 @@ Less painful than binary search; the fixes were mostly about *when* to update st
 - **Arrays & Hashing:** 1, 217, 242, 49, 347, 238, 36, 271, 128 ✅ (section basically complete)
 - **Stack:** 20, 155, 150, 739, 84, 853 ✅
 
-Foundation is solid. The plan resumes the NeetCode 150 roadmap and drills the patterns interviewers reach for most.
+Foundation is solid, but these need a **brush-up re-drill** (highest interview frequency — re-code cold on Wed Jul 22 + as daily warmups): Arrays & Hashing → **1, 49, 347, 238, 128**; Stack → **20, 150, 739, 155**. The plan resumes the NeetCode 150 roadmap and drills the patterns interviewers reach for most.
 
 ---
 
@@ -203,9 +203,14 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 - 45-min timer, 2 unseen problems (1 easy-medium warmup + 1 medium-hard, e.g. a graph or tree). Talk out loud the whole time; use a blank pad, no autocomplete.
 - Debrief: did you ask clarifying Qs? State complexity before coding? Test at the end?
 
-#### Wed Jul 22 (AM) — Weak-area drilling
+#### Wed Jul 22 (AM) — Weak-area drilling + Array/Stack re-drill
 
 - Re-code the 3–5 starred problems you missed. Re-do the single hardest problem from your two weakest categories, timed.
+- **Array & Hashing / Stack re-drill** (already solved — re-code cold, ~5–8 min each, no peeking). Pick the ones that feel rusty; these are the highest-frequency at Medium:
+  - Arrays & Hashing: [ ] [1 Two Sum](https://leetcode.com/problems/two-sum/) · [ ] [49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) · [ ] [347 Top K Frequent](https://leetcode.com/problems/top-k-frequent-elements/) · [ ] [238 Product Except Self](https://leetcode.com/problems/product-of-array-except-self/) · [ ] [128 Longest Consecutive Seq](https://leetcode.com/problems/longest-consecutive-sequence/)
+  - Stack: [ ] [20 Valid Parentheses](https://leetcode.com/problems/valid-parentheses/) · [ ] [150 Eval RPN](https://leetcode.com/problems/evaluate-reverse-polish-notation/) · [ ] [739 Daily Temperatures](https://leetcode.com/problems/daily-temperatures/) (monotonic stack) · [ ] [155 Min Stack](https://leetcode.com/problems/min-stack/)
+  - Optional/harder: [ ] [853 Car Fleet](https://leetcode.com/problems/car-fleet/) · [ ] [84 Largest Rectangle](https://leetcode.com/problems/largest-rectangle-in-histogram/) (only if time — rarer under 45 min)
+- **Also warm up with ONE of these each weekday morning (Mon–Thu)** before the day's topic — 5 min, get the fingers moving on a pattern you already know. Rotates the re-drill across the week so it isn't all crammed into Wednesday.
 
 #### Thu Jul 23 (AM) — Mock #2 + behavioral + wind down
 
