@@ -12,7 +12,10 @@
 - **Fri Jul 10 (~2.5 hr):** Early start! Finished 125, 167, 15. Solved 3Sum twice (hashmap + textbook sorted two-pointer); nailed the duplicate-skip reasoning and O(n²) optimality. Stopped before 11 Container With Most Water.
 - **Sat Jul 11:** Rest day (hiking + time with girlfriend) — recovery is part of the plan.
 - **Sun Jul 12 (full day):** Finished Sliding Window + Binary Search. Binary search was the grind — 33 took a while to see the two-level "which half is sorted" decision, and 875 was ~40 min (20 staring, 20 on edge cases). Came out with a clear Flavor A vs Flavor B mental model. See "Binary Search — lessons learned" below. Made Anki cards.
-- **Next up (Mon Jul 13):** Linked List.
+- **Mon Jul 13 (AM):** Linked List. Warmup 20 (stack) — worked but roundabout (copied string + `pop(0)` → O(n²), pushed closers then double-popped); relearned the clean template (iterate directly, `stack.pop() != mapping[ch]`, closers never go on the stack). 206 Reverse List (~15 min) — was one step from correct; bug was `while head and head.next` stopping on the last node + `return head` instead of `return prev`. Both from over-guarding the last node, which is exactly the node whose flip gives the new head.
+  Continued: 21 (~7 min, dummy head), 19 (two-pointer gap + dummy for remove-head), 141 (~2 min), 142 (~3 min — got the phase-2 algebra: it works *because* of phase 1's 2:1 speed ratio, which forces L ≡ C−m mod C).
+  Finished the day with 2 Add Two Numbers (~10 min). **Full Linked List core done** (206, 21, 19, 141, 142, 2) — dummy-head + two-pointer patterns are clicking. Stretch 143 Reorder List skipped (out of time). Self-assessment: warmup 20 took too long, and was rusty on reverse (206) + remove-nth (19) — the **dummy-node idiom** was the main thing to relearn. Worth a re-drill later in the week.
+- **Next up (Tue Jul 14):** Trees I — traversal (226, 104, 543, 110).
 
 ## Lessons learned — patterns that fought back
 
@@ -120,11 +123,11 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 
 #### Mon Jul 13 (AM) — Linked List
 
-- [ ] [206 Reverse List](https://leetcode.com/problems/reverse-linked-list/) ← must be instant
-- [ ] [21 Merge Two Sorted](https://leetcode.com/problems/merge-two-sorted-lists/)
-- [ ] [19 Remove Nth From End](https://leetcode.com/problems/remove-nth-node-from-end-of-list/)
-- [ ] [141 Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/) / [142 Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) (Floyd's)
-- [ ] [2 Add Two Numbers](https://leetcode.com/problems/add-two-numbers/)
+- [x] [206 Reverse List](https://leetcode.com/problems/reverse-linked-list/) ← must be instant (~15 min; `while head` + `return prev`)
+- [x] [21 Merge Two Sorted](https://leetcode.com/problems/merge-two-sorted-lists/) (~7 min; dummy head `head = curr = ListNode()`, O(1) leftover attach)
+- [x] [19 Remove Nth From End](https://leetcode.com/problems/remove-nth-node-from-end-of-list/) (two-pointer gap; dummy makes remove-head collapse into the normal case — was the 20-failing-case bug)
+- [x] [141 Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/) (~2 min, remembered Floyd's) / [x] [142 Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/) (Floyd's)
+- [x] [2 Add Two Numbers](https://leetcode.com/problems/add-two-numbers/) (~10 min; digit+digit+carry, `divmod`. Reversed lists = node order is add order, no powers of 10. Polish: `while l1 or l2 or carry` folds the final-carry node into the loop)
 - Stretch: [ ] [143 Reorder List](https://leetcode.com/problems/reorder-list/)
 
 #### Tue Jul 14 (AM) — Trees I (traversal)

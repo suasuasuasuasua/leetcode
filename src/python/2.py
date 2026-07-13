@@ -1,61 +1,38 @@
-# https://leetcode.com/problems/add-two-numbers/
 from typing import Optional
 
 
+# Definition for singly-linked list.
 class ListNode:
-    # Definition for singly-linked list.
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
 
-# @leet start
 class Solution:
     def addTwoNumbers(
         self, l1: Optional[ListNode], l2: Optional[ListNode]
     ) -> Optional[ListNode]:
-        # problem
-        # given two linked lists where the nodes are stored in reverse order,
-        # return the sum as a linked list
-        def traverse(ll: Optional[ListNode]) -> int:
-            head = ll
+        dummy = ListNode()
+        curr = dummy
 
-            # track the running sum
-            result = 0
-            counter = 0
-            while head:
-                # multiply each number by powers of 10
-                result += head.val * (10**counter)
-                head = head.next
+        carry = 0
+        while l1 or l2:
+            l1_val = l1.val if l1 else 0
+            l2_val = l2.val if l2 else 0
 
-                # increment the counter
-                counter += 1
+            new_val = l1_val + l2_val + carry
+            carry, remainder = divmod(new_val, 10)
 
-            return result
+            curr.next = ListNode(val=remainder)
+            curr = curr.next
 
-        first = traverse(l1)
-        second = traverse(l2)
-        summation = first + second
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
 
-        # construct the linked list representation backwards
-        q, r = divmod(summation, 10)
-        summation = q
+        if carry:
+            curr.next = ListNode(val=carry)
+            curr = curr.next
 
-        # create the first node
-        head = ListNode(r)
-        curr = head
-
-        # loop while we can break off (rightmost) numbers from the summation
-        while q:
-            q, r = divmod(summation, 10)
-            summation = q
-
-            # create the new node
-            new_node = ListNode(r)
-            curr.next = new_node
-            curr = new_node
-
-        return head
-
-
-# @leet end
+        return dummy.next
