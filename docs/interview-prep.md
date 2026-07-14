@@ -15,7 +15,8 @@
 - **Mon Jul 13 (AM):** Linked List. Warmup 20 (stack) — worked but roundabout (copied string + `pop(0)` → O(n²), pushed closers then double-popped); relearned the clean template (iterate directly, `stack.pop() != mapping[ch]`, closers never go on the stack). 206 Reverse List (~15 min) — was one step from correct; bug was `while head and head.next` stopping on the last node + `return head` instead of `return prev`. Both from over-guarding the last node, which is exactly the node whose flip gives the new head.
   Continued: 21 (~7 min, dummy head), 19 (two-pointer gap + dummy for remove-head), 141 (~2 min), 142 (~3 min — got the phase-2 algebra: it works *because* of phase 1's 2:1 speed ratio, which forces L ≡ C−m mod C).
   Finished the day with 2 Add Two Numbers (~10 min). **Full Linked List core done** (206, 21, 19, 141, 142, 2) — dummy-head + two-pointer patterns are clicking. Stretch 143 Reorder List skipped (out of time). Self-assessment: warmup 20 took too long, and was rusty on reverse (206) + remove-nth (19) — the **dummy-node idiom** was the main thing to relearn. Worth a re-drill later in the week.
-- **Next up (Tue Jul 14):** Trees I — traversal (226, 104, 543, 110).
+- **Tue Jul 14 (AM):** Trees I complete (226, 104, 543, 110) + warmups 1 (~2 min) & 150 RPN (~10 min, truncate-toward-zero ≠ floor). Recursion clicked fast: the post-order "combine children" template, then the "return X / track Y" pattern in 3 flavors (tuple, nonlocal, sentinel). 226 in-order-fails insight was the highlight.
+- **Next up (Wed Jul 15):** Trees II — structure + BFS (100/572, 235, 102).
 
 ## Lessons learned — patterns that fought back
 
@@ -132,10 +133,10 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 
 #### Tue Jul 14 (AM) — Trees I (traversal)
 
-- [ ] [226 Invert](https://leetcode.com/problems/invert-binary-tree/)
-- [ ] [104 Max Depth](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
-- [ ] [543 Diameter](https://leetcode.com/problems/diameter-of-binary-tree/)
-- [ ] [110 Balanced](https://leetcode.com/problems/balanced-binary-tree/)
+- [x] [226 Invert](https://leetcode.com/problems/invert-binary-tree/) (<5 min; pre-order swap. In-order FAILS — swapping *between* the two recursions redirects step 3 onto the old-left (undo) and skips the old-right entirely. Pre/post both safe.)
+- [x] [104 Max Depth](https://leetcode.com/problems/maximum-depth-of-binary-tree/) (~3 min; post-order "combine children". Cleanest = no accumulator: `return 1 + max(depth(left), depth(right))`. Two accumulation styles: thread down as param vs build up via return.)
+- [x] [543 Diameter](https://leetcode.com/problems/diameter-of-binary-tree/) (~10 min; "return one thing, track another" — helper returns *height* (`1 + max(l,r)`), harvest *diameter* (`l + r`) into a side var. Reuses 104's depth. Prefer `nonlocal best` over a class var — class-scope state can leak across calls.)
+- [x] [110 Balanced](https://leetcode.com/problems/balanced-binary-tree/) (~5 min; solved with the **tuple-return** style `(height, is_balanced)` — a 3rd variant alongside 543's side-var and the `-1` sentinel. All O(n). Toolkit for "return X, track Y": tuple / nonlocal / sentinel — pick by what Y is.)
 
 #### Wed Jul 15 (AM) — Trees II (structure + BFS)
 
