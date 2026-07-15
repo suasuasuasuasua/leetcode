@@ -13,32 +13,16 @@ class Solution:
         # the lowest common ancestor is defined between two nodes p and q as the lowest node in T has both p and q as descendants
         # a node is allowed to be a descandant of itself
 
-        # try to find the target
-        def search(root, target):
-            if not root:
-                return False
+        while root:
+            # both nodes must be on the left side
+            if p.val < root.val and q.val < root.val:
+                root = root.left
+            # or the right side
+            elif p.val > root.val and q.val > root.val:
+                root = root.right
+            # else, the two must have branched and split off
+            # this is the common
+            else:
+                break
 
-            if root.val == target.val:
-                return True
-            elif root.val < target.val:
-                return search(root.right, target)
-            elif root.val > target.val:
-                return search(root.left, target)
-
-        lowest_common = None
-
-        def traverse(root):
-            nonlocal lowest_common
-
-            if not root:
-                return
-
-            traverse(root.left)
-            traverse(root.right)
-
-            # try to search for the two targets as low as possible
-            if not lowest_common and search(root, p) and search(root, q):
-                lowest_common = root
-
-        traverse(root)
-        return lowest_common
+        return root
