@@ -16,7 +16,8 @@
   Continued: 21 (~7 min, dummy head), 19 (two-pointer gap + dummy for remove-head), 141 (~2 min), 142 (~3 min — got the phase-2 algebra: it works *because* of phase 1's 2:1 speed ratio, which forces L ≡ C−m mod C).
   Finished the day with 2 Add Two Numbers (~10 min). **Full Linked List core done** (206, 21, 19, 141, 142, 2) — dummy-head + two-pointer patterns are clicking. Stretch 143 Reorder List skipped (out of time). Self-assessment: warmup 20 took too long, and was rusty on reverse (206) + remove-nth (19) — the **dummy-node idiom** was the main thing to relearn. Worth a re-drill later in the week.
 - **Tue Jul 14 (AM):** Trees I complete (226, 104, 543, 110) + warmups 1 (~2 min) & 150 RPN (~10 min, truncate-toward-zero ≠ floor). Recursion clicked fast: the post-order "combine children" template, then the "return X / track Y" pattern in 3 flavors (tuple, nonlocal, sentinel). 226 in-order-fails insight was the highlight.
-- **Next up (Wed Jul 15):** Trees II — structure + BFS (100/572, 235, 102).
+- **Wed Jul 15 (AM):** Trees II complete (100, 572, 235, 102) + warmups 739 (~8 min, monotonic stack) & 238 (~30 min, prefix/suffix — learned the O(1)-space version: write prefix into output, fold suffix with a running scalar). Clarified DFS vs BFS (pre/in/post all DFS; BFS = queue). 235: "BST → decide direction, don't search" (O(h) not O(n·h)); strict `<`/`>` needed so "node == target" falls through to LCA. 102: first BFS — snapshot `len(queue)` per level. **102 flagged for review.**
+- **Next up (Thu Jul 16):** Trees III — views + BST (199, 98, 230, 105).
 
 ## Lessons learned — patterns that fought back
 
@@ -140,9 +141,9 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 
 #### Wed Jul 15 (AM) — Trees II (structure + BFS)
 
-- [ ] [100 Same Tree](https://leetcode.com/problems/same-tree/) / [572 Subtree](https://leetcode.com/problems/subtree-of-another-tree/)
-- [ ] [235 LCA of a BST](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
-- [ ] [102 Level Order (BFS)](https://leetcode.com/problems/binary-tree-level-order-traversal/) ← must know
+- [x] [100 Same Tree](https://leetcode.com/problems/same-tree/) (~5 min; walk two nodes in lockstep, `match` on the None cases. Pre-order is fail-fast — check val before recursing so `and` short-circuits) / [x] [572 Subtree](https://leetcode.com/problems/subtree-of-another-tree/) (recursion-in-recursion: reuse `isSameTree` at every node. Outer combine is **`or`** ("match somewhere"), base case `False` — neutral element of `or`)
+- [x] [235 LCA of a BST](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/) (~6 min, but my version was O(n·h): post-order over all nodes + BST-search from each. **Optimal is O(h) single walk down**: both vals > node → go right; both < → go left; else they split → node IS the LCA. Lesson: "BST" → *decide direction*, don't search everywhere.)
+- [x] [102 Level Order (BFS)](https://leetcode.com/problems/binary-tree-level-order-traversal/) ← must know (~15 min. First solved with DFS+depth-index (valid! pre-order fills each level L→R), then re-drilled the real **BFS**: `deque`, `while queue` = one level per iter, **snapshot `n = len(queue)` before the inner loop** to carve levels. `popleft()` O(1) not `pop(0)`. **REVIEW — first queue traversal; Anki card + re-drill.** BFS is the must-know for Sat graph day.)
 
 #### Thu Jul 16 (AM) — Trees III (views + BST)
 

@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List, Optional
 
 
@@ -11,22 +12,34 @@ class TreeNode:
 
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        queue = list()
+        if not root:
+            return list()
 
-        def traverse(root, depth):
-            nonlocal queue
-            if not root:
-                return
+        queue = deque([root])
+        result = list()
 
-            # add to queue at the depth
-            if depth < len(queue):
-                queue[depth].append(root.val)
-            # if depth doesn't exist, add it
-            else:
-                queue.append([root.val])
+        while queue:
+            # accumulate the nodes level by level
+            # at the top of the loop, the size of the level is the size of the
+            # queue
+            # - at first iteration, it is 1 (just the root)
+            # - at next iteration, the root may add up to 2 children to the
+            #   queue
+            # - and doubling so on potentially
+            level = list()
+            n = len(queue)
+            for _ in range(n):
+                # grab the front of the queue
+                node = queue.popleft()
+                level.append(node.val)
 
-            traverse(root.left, depth + 1)
-            traverse(root.right, depth + 1)
+                # add the left and right children if they exist
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
 
-        traverse(root, 0)
-        return queue
+            # append the entire level
+            result.append(level)
+
+        return result
