@@ -17,7 +17,8 @@
   Finished the day with 2 Add Two Numbers (~10 min). **Full Linked List core done** (206, 21, 19, 141, 142, 2) — dummy-head + two-pointer patterns are clicking. Stretch 143 Reorder List skipped (out of time). Self-assessment: warmup 20 took too long, and was rusty on reverse (206) + remove-nth (19) — the **dummy-node idiom** was the main thing to relearn. Worth a re-drill later in the week.
 - **Tue Jul 14 (AM):** Trees I complete (226, 104, 543, 110) + warmups 1 (~2 min) & 150 RPN (~10 min, truncate-toward-zero ≠ floor). Recursion clicked fast: the post-order "combine children" template, then the "return X / track Y" pattern in 3 flavors (tuple, nonlocal, sentinel). 226 in-order-fails insight was the highlight.
 - **Wed Jul 15 (AM):** Trees II complete (100, 572, 235, 102) + warmups 739 (~8 min, monotonic stack) & 238 (~30 min, prefix/suffix — learned the O(1)-space version: write prefix into output, fold suffix with a running scalar). Clarified DFS vs BFS (pre/in/post all DFS; BFS = queue). 235: "BST → decide direction, don't search" (O(h) not O(n·h)); strict `<`/`>` needed so "node == target" falls through to LCA. 102: first BFS — snapshot `len(queue)` per level. **102 flagged for review.**
-- **Next up (Thu Jul 16):** Trees III — views + BST (199, 98, 230, 105).
+- **Thu Jul 16 (AM):** Trees III complete (199, 230, 98, 105) + warmups 49 & 155 (~3 min each). **ENTIRE TREES BLOCK DONE.** 199 BFS from memory (review paid off). 230: in-order=sorted + early exit; guard `is not None` not truthy. 98: the ancestor-range trap → pass `(low,high)` down; **info-flow principle: down→pre-order, up→post-order**. 105 (hard) in ~5-10 min — nailed the preorder-root + inorder-split insight; O(n) upgrade noted. Ahead of schedule — didn't need the Friday buffer.
+- **Next up (Fri Jul 17):** Heaps (703, 1046, 215, 973). Last Tier-1 topic!
 
 ## Lessons learned — patterns that fought back
 
@@ -147,10 +148,10 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 
 #### Thu Jul 16 (AM) — Trees III (views + BST)
 
-- [ ] [199 Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
-- [ ] [98 Validate BST](https://leetcode.com/problems/validate-binary-search-tree/) ← common
-- [ ] [230 Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
-- [ ] [105 Build Tree from Pre/Inorder](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+- [x] [199 Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/) (~2-3 min from memory — BFS re-drill stuck! Grab rightmost per level. Tidy-up: capture the `i == level_size-1` node directly instead of building full level lists then discarding.)
+- [x] [98 Validate BST](https://leetcode.com/problems/validate-binary-search-tree/) ← common (hit the classic trap: checking parent-child only misses ancestor constraints. Fix: pass a **(low, high) range** down, tighten on descent — left→`(low, node.val)`, right→`(node.val, high)`. **Big principle: info flows DOWN → pre-order (constrain, fail-fast); info flows UP → post-order (aggregate, e.g. 104/543/110).**)
+- [x] [230 Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) (~10 min; **in-order = sorted**, k-th visited node = answer, with early exit. `k` is a *rank* not a value; increment counter ONCE in the node-slot of L-Node-R. Robustness: guard with `if result is not None` (bare `if result` breaks when answer is 0).)
+- [x] [105 Build Tree from Pre/Inorder](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) (~5-10 min! preorder[0] = root; split inorder at root → left/right subtrees; recurse. My version O(n²) (`pop(0)` + `.index()` + slicing). **Optimal O(n): value→index hashmap, a preorder cursor, pass `(lo,hi)` bounds instead of slicing.** Same "precompute lookup + pass indices, don't rescan/copy" lesson.)
 
 #### Fri Jul 17 (AM) — Heaps
 
