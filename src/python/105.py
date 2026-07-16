@@ -17,17 +17,25 @@ class Solution:
         # - we can loop over this element by element
         # the in order list is split based on element from the pre order
         # - everything to the left is left child, everything to the right is right child
-        def build(preorder, inorder):
-            if not preorder or not inorder:
+
+        # reverse map the indexes so that it's easy to lookup
+        # the preorder val -> inorder index
+        mapping = {v: k for k, v in enumerate(inorder)}
+
+        self.counter = 0
+
+        def build(low, high):
+            if low > high:
                 return
 
-            pnode = preorder.pop(0)
-            pivot = inorder.index(pnode)
+            pnode = preorder[self.counter]
+            self.counter += 1
+            pivot = mapping[pnode]
 
             node = TreeNode(pnode)
-            node.left = build(preorder, inorder[:pivot])
-            node.right = build(preorder, inorder[pivot + 1 :])
+            node.left = build(low, pivot - 1)
+            node.right = build(pivot + 1, high)
 
             return node
 
-        return build(preorder, inorder)
+        return build(0, len(inorder) - 1)
