@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD013 -->
 # Anduril SWE Tech Screen — 2-Week Prep Plan
 
-**Interview date:** ~2026-07-24 (two weeks from 2026-07-10)
+**Interview date:** ✅ **CONFIRMED — Fri 2026-07-24, 1:30pm** (the preferred Friday slot came through). Full runway, no compression needed. Interview is *afternoon*, so Fri AM = light warmup only.
 
 **Format:** 40–45 min live coding on HackerRank, ~2 problems (1 easier + 1 harder), LeetCode **Medium** level.
 
@@ -18,7 +18,9 @@
 - **Tue Jul 14 (AM):** Trees I complete (226, 104, 543, 110) + warmups 1 (~2 min) & 150 RPN (~10 min, truncate-toward-zero ≠ floor). Recursion clicked fast: the post-order "combine children" template, then the "return X / track Y" pattern in 3 flavors (tuple, nonlocal, sentinel). 226 in-order-fails insight was the highlight.
 - **Wed Jul 15 (AM):** Trees II complete (100, 572, 235, 102) + warmups 739 (~8 min, monotonic stack) & 238 (~30 min, prefix/suffix — learned the O(1)-space version: write prefix into output, fold suffix with a running scalar). Clarified DFS vs BFS (pre/in/post all DFS; BFS = queue). 235: "BST → decide direction, don't search" (O(h) not O(n·h)); strict `<`/`>` needed so "node == target" falls through to LCA. 102: first BFS — snapshot `len(queue)` per level. **102 flagged for review.**
 - **Thu Jul 16 (AM):** Trees III complete (199, 230, 98, 105) + warmups 49 & 155 (~3 min each). **ENTIRE TREES BLOCK DONE.** 199 BFS from memory (review paid off). 230: in-order=sorted + early exit; guard `is not None` not truthy. 98: the ancestor-range trap → pass `(low,high)` down; **info-flow principle: down→pre-order, up→post-order**. 105 (hard) in ~5-10 min — nailed the preorder-root + inorder-split insight; O(n) upgrade noted. Ahead of schedule — didn't need the Friday buffer.
-- **Next up (Fri Jul 17):** Heaps (703, 1046, 215, 973). Last Tier-1 topic!
+- **Fri Jul 17:** Interview **confirmed for Fri Jul 24 1:30pm** 🎯. Work ran long — Heaps slipped to Sat. Rebalanced Week 2 (below): weekend absorbs Heaps, DP/Tries (Tier 3) is the shock absorber, two mocks stay protected. Solo side-quest: LC 6 Zigzag (learned the `numRows==1` guard + list-of-lists over defaultdict + O(n²) `+=` vs `join`; Python `list` = dynamic array not linked list, so `pop(0)` is O(n)).
+- **Sat Jul 17→18 update:** Day off will be **Thu Jul 23** (interview eve — Mock #2 + behavioral, then taper); **Mon Jul 20** has a work meeting so DP/Tries is compressed.
+- **Next up (Sat Jul 18):** Heaps (703, 1046, 215, 973) + Backtracking. Last Tier-1 topic!
 
 ## Lessons learned — patterns that fought back
 
@@ -153,34 +155,36 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 - [x] [230 Kth Smallest in BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/) (~10 min; **in-order = sorted**, k-th visited node = answer, with early exit. `k` is a *rank* not a value; increment counter ONCE in the node-slot of L-Node-R. Robustness: guard with `if result is not None` (bare `if result` breaks when answer is 0).)
 - [x] [105 Build Tree from Pre/Inorder](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) (~5-10 min! preorder[0] = root; split inorder at root → left/right subtrees; recurse. My version O(n²) (`pop(0)` + `.index()` + slicing). **Optimal O(n): value→index hashmap, a preorder cursor, pass `(lo,hi)` bounds instead of slicing.** Same "precompute lookup + pass indices, don't rescan/copy" lesson.)
 
-#### Fri Jul 17 (AM) — Heaps
-
-- [ ] [703 Kth Largest in Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
-- [ ] [1046 Last Stone Weight](https://leetcode.com/problems/last-stone-weight/)
-- [ ] [215 Kth Largest Element](https://leetcode.com/problems/kth-largest-element-in-an-array/) (also learn quickselect) ← common
-- [ ] [973 K Closest Points](https://leetcode.com/problems/k-closest-points-to-origin/)
-- Stretch: [ ] [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/)
+#### Fri Jul 17 — ⚠️ mostly lost to work; Heaps pushed to Sat
 
 ### Week 2 — advanced patterns + interview simulation
 
-#### Sat Jul 18 (full day) — Backtracking + Graphs (Tier 2)
+> **Rebalanced Fri Jul 17** after Heaps slipped a day. Interview confirmed for Fri 1:30pm = full runway, so the cascade is gentle. Priorities that stay protected: **Heaps (last Tier-1)**, **Graphs (top Tier-2)**, and **two mocks (Tue + Thu)**. **2-D DP + Tries (Tier 3)** is the shock absorber — compress or drop it if time runs short. **Mon has a work meeting** (DP compressed); **Thu is the day off** — a full interview-eve day for Mock #2 (+ optional 3rd) and behavioral, then taper.
 
+#### Sat Jul 18 (full day) — Heaps + Backtracking
+
+- Heaps (last Tier-1 — do first):
+  - [ ] [703 Kth Largest in Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
+  - [ ] [1046 Last Stone Weight](https://leetcode.com/problems/last-stone-weight/)
+  - [ ] [215 Kth Largest Element](https://leetcode.com/problems/kth-largest-element-in-an-array/) (also learn quickselect) ← common
+  - [ ] [973 K Closest Points](https://leetcode.com/problems/k-closest-points-to-origin/)
+  - Stretch: [ ] [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/)
 - Backtracking:
   - [ ] [78 Subsets](https://leetcode.com/problems/subsets/)
   - [ ] [39 Combination Sum](https://leetcode.com/problems/combination-sum/) ← common
   - [ ] [46 Permutations](https://leetcode.com/problems/permutations/)
   - [ ] [79 Word Search](https://leetcode.com/problems/word-search/)
   - [ ] [22 Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
-- Graphs:
+
+#### Sun Jul 19 (full day) — Graphs + Intervals / Greedy
+
+- Graphs (top Tier-2 — reuses your BFS/DFS from trees):
   - [ ] [200 Number of Islands](https://leetcode.com/problems/number-of-islands/) ← common
   - [ ] [133 Clone Graph](https://leetcode.com/problems/clone-graph/)
   - [ ] [695 Max Area of Island](https://leetcode.com/problems/max-area-of-island/)
   - [ ] [207 Course Schedule](https://leetcode.com/problems/course-schedule/) (topo/cycle) ← common
   - [ ] [994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) (multi-source BFS)
-- Stretch: [ ] [417 Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
-
-#### Sun Jul 19 (full day) — Intervals + Greedy + 1-D DP
-
+  - Stretch: [ ] [417 Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
 - Intervals/Greedy:
   - [ ] [57 Insert Interval](https://leetcode.com/problems/insert-interval/)
   - [ ] [56 Merge Intervals](https://leetcode.com/problems/merge-intervals/) ← common
@@ -188,21 +192,22 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
   - [ ] [253 Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) (LC premium; [NeetCode](https://neetcode.io/problems/meeting-schedule-ii))
   - [ ] [53 Max Subarray](https://leetcode.com/problems/maximum-subarray/) (Kadane's)
   - [ ] [55 Jump Game](https://leetcode.com/problems/jump-game/)
-- 1-D DP (Tier 3):
+
+#### Mon Jul 20 — DP + Tries (Tier 3 — the shock absorber; compress or drop if time's tight)
+
+- 1-D DP:
   - [ ] [70 Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
   - [ ] [198 House Robber](https://leetcode.com/problems/house-robber/) / [213 House Robber II](https://leetcode.com/problems/house-robber-ii/)
   - [ ] [322 Coin Change](https://leetcode.com/problems/coin-change/) ← common
   - [ ] [139 Word Break](https://leetcode.com/problems/word-break/)
-- Stretch: [ ] [300 Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
-
-#### Mon Jul 20 — 2-D DP + Tries (Tier 3)
-
-- [ ] [62 Unique Paths](https://leetcode.com/problems/unique-paths/)
-- [ ] [1143 Longest Common Subseq](https://leetcode.com/problems/longest-common-subsequence/)
-- [ ] [208 Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/)
-- [ ] [211 Add & Search Words](https://leetcode.com/problems/design-add-and-search-words-data-structure/)
-- [ ] [5 Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
-- *(If you take this day off work, add a 3rd full mock in the afternoon.)*
+  - Stretch: [ ] [300 Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
+- 2-D DP + Tries (lowest priority — first to cut):
+  - [ ] [62 Unique Paths](https://leetcode.com/problems/unique-paths/)
+  - [ ] [1143 Longest Common Subseq](https://leetcode.com/problems/longest-common-subsequence/)
+  - [ ] [208 Implement Trie](https://leetcode.com/problems/implement-trie-prefix-tree/)
+  - [ ] [211 Add & Search Words](https://leetcode.com/problems/design-add-and-search-words-data-structure/)
+  - [ ] [5 Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
+- *(⚠️ Monday has a work meeting — time is tight, so this is compressed. That's fine: DP/Tries is the shock absorber. Get 1-D DP if you can; let 2-D/Tries slide.)*
 
 #### Tue Jul 21 (AM) — Mock interview #1
 
@@ -218,11 +223,11 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
   - Optional/harder: [ ] [853 Car Fleet](https://leetcode.com/problems/car-fleet/) · [ ] [84 Largest Rectangle](https://leetcode.com/problems/largest-rectangle-in-histogram/) (only if time — rarer under 45 min)
 - **Also warm up with ONE of these each weekday morning (Mon–Thu)** before the day's topic — 5 min, get the fingers moving on a pattern you already know. Rotates the re-drill across the week so it isn't all crammed into Wednesday.
 
-#### Thu Jul 23 (AM) — Mock #2 + behavioral + wind down
+#### Thu Jul 23 — 🏖️ DAY OFF WORK (interview eve — front-load, then taper)
 
-- Second 45-min mock, fresh problems.
-- Prep your **"why Anduril"** answer + 3–4 thoughtful interviewer questions.
-- Light review only — no new material.
+- **Morning (do the work):** Mock #2, fresh problems, 45-min timer. If it went well, optionally a 3rd mock — mocks are the single highest-value use of this day.
+- **Midday:** Prep your **"why Anduril"** answer + 3–4 thoughtful interviewer questions. Re-code any 1–2 problems that felt shaky this week (Anki review).
+- **⚠️ Afternoon/evening — TAPER.** No new material, no grinding. The night before is for *rest and confidence*, not cramming. A tired brain interviews worse than a slightly-less-drilled one. Get good sleep.
 
 #### Fri Jul 24 — Interview day 🎯
 
