@@ -20,7 +20,9 @@
 - **Thu Jul 16 (AM):** Trees III complete (199, 230, 98, 105) + warmups 49 & 155 (~3 min each). **ENTIRE TREES BLOCK DONE.** 199 BFS from memory (review paid off). 230: in-order=sorted + early exit; guard `is not None` not truthy. 98: the ancestor-range trap → pass `(low,high)` down; **info-flow principle: down→pre-order, up→post-order**. 105 (hard) in ~5-10 min — nailed the preorder-root + inorder-split insight; O(n) upgrade noted. Ahead of schedule — didn't need the Friday buffer.
 - **Fri Jul 17:** Interview **confirmed for Fri Jul 24 1:30pm** 🎯. Work ran long — Heaps slipped to Sat. Rebalanced Week 2 (below): weekend absorbs Heaps, DP/Tries (Tier 3) is the shock absorber, two mocks stay protected. Solo side-quest: LC 6 Zigzag (learned the `numRows==1` guard + list-of-lists over defaultdict + O(n²) `+=` vs `join`; Python `list` = dynamic array not linked list, so `pop(0)` is O(n)).
 - **Sat Jul 17→18 update:** Day off will be **Thu Jul 23** (interview eve — Mock #2 + behavioral, then taper); **Mon Jul 20** has a work meeting so DP/Tries is compressed.
-- **Next up (Sat Jul 18):** Heaps (703, 1046, 215, 973) + Backtracking. Last Tier-1 topic!
+- **Sat Jul 18 (full day):** **Heaps + Backtracking DONE.** Warmups 347 & 128 (learned: iterate the SET not the list to avoid O(n²) on dup-heavy inputs). Heaps (703, 1046, 215, 973): the size-k heap heuristic (top = weakest = eviction candidate; k-largest→min-heap, k-smallest→max-heap), max-heap-via-negation, `heappushpop` vs `heapreplace`. Quickselect dogeared. **ALL TIER 1 COMPLETE.** Backtracking (78, 39, 46, 79, 22): one choose/explore/un-choose skeleton; dedup varies (`start` / `used` / validity-prune). Backtracking's power = prune at the choice.
+- **Sat Jul 18 note:** Backtracking felt weak — flagged as the **top re-drill priority for Wed Jul 22** (re-code 78/39/46 cold). Anki cards for the three dedup variants.
+- **Next up (Sun Jul 19):** Graphs + Intervals/Greedy.
 
 ## Lessons learned — patterns that fought back
 
@@ -170,11 +172,11 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
   - [x] [973 K Closest Points](https://leetcode.com/problems/k-closest-points-to-origin/) (compare squared dist `x*x+y*y`, skip sqrt. **THE key heap heuristic: a size-k heap uses the OPPOSITE orientation so its top = the weakest of your k = the eviction candidate.** k-largest→min-heap (703); k-smallest→max-heap (973). Eviction: `heapreplace` when new beats `heap[0]`.)
   - Stretch: [ ] [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/)
 - Backtracking:
-  - [ ] [78 Subsets](https://leetcode.com/problems/subsets/)
-  - [ ] [39 Combination Sum](https://leetcode.com/problems/combination-sum/) ← common
-  - [ ] [46 Permutations](https://leetcode.com/problems/permutations/)
-  - [ ] [79 Word Search](https://leetcode.com/problems/word-search/)
-  - [ ] [22 Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
+  - [x] [78 Subsets](https://leetcode.com/problems/subsets/) (first tried delete-any-element + `set` dedup = slow, O(n·n!); the `set` was the smell. Clean = **choose/explore/UN-CHOOSE** template. Two forms: (A) include/exclude per element = the binary power-set idea, records at leaves; (B) start-index loop, records at every node — B generalizes to 39/46. `path[:]` to copy, `pop()` to un-choose.)
+  - [x] [39 Combination Sum](https://leetcode.com/problems/combination-sum/) ← common (needed hints — hard one. Template B + two twists: **pass `i` not `i+1`** (reuse allowed), and **base cases on remaining sum** (0=record, <0=overshoot/prune). `start` enforces non-decreasing order → each combo once, no `set`. Complexity is O(n^(target/min)) — depth bounded by TARGET, width by n; not nⁿ.)
+  - [x] [46 Permutations](https://leetcode.com/problems/permutations/) (order matters → DROP `start`, track a **`used` set** instead; base case = path length == n. O(n!·n). Un-choose undoes BOTH `used.remove` and `path.pop`. (Duplicates variant 47 → used-by-index + sort.) The trio's only differences are the dedup rule + base case; skeleton is always choose/explore/un-choose.)
+  - [x] [79 Word Search](https://leetcode.com/problems/word-search/) (grid backtracking: DFS 4 dirs, mark visited → explore → **un-mark** (same as `path.pop()`). Try DFS from EVERY cell (word can start anywhere). O(m·n·4^L). Constant-factor upgrade: overwrite `board[r][c]="#"` + restore instead of a `visited` set — no hashing, O(1) space, and `#` auto-fails the char check.)
+  - [x] [22 Generate Parentheses](https://leetcode.com/problems/generate-parentheses/) (first tried "nest vs append whole `()`" → over-generated + `set` smell. Fix: build **char-by-char** with counters — add `(` if `open<n`, add `)` if `close<open`; base case len==2n. **Backtracking's power = prune at the choice** so you only ever build valid branches (no set). Count = Catalan(n).)
 
 #### Sun Jul 19 (full day) — Graphs + Intervals / Greedy
 
@@ -216,6 +218,7 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 
 #### Wed Jul 22 (AM) — Weak-area drilling + Array/Stack re-drill
 
+- **🎯 TOP PRIORITY: Backtracking re-drill** (flagged weak Sat Jul 18). Re-code cold, no hints, from the skeleton: [ ] 78 Subsets · [ ] 39 Combination Sum · [ ] 46 Permutations · [ ] (stretch) 79 Word Search. Goal: reproduce **choose/explore/un-choose** without looking, and correctly pick the dedup rule (`start` vs `used` vs validity-prune) per problem. If you can write 39 and 46 cold, you own it.
 - Re-code the 3–5 starred problems you missed. Re-do the single hardest problem from your two weakest categories, timed.
 - **Array & Hashing / Stack re-drill** (already solved — re-code cold, ~5–8 min each, no peeking). Pick the ones that feel rusty; these are the highest-frequency at Medium:
   - Arrays & Hashing: [ ] [1 Two Sum](https://leetcode.com/problems/two-sum/) · [ ] [49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) · [ ] [347 Top K Frequent](https://leetcode.com/problems/top-k-frequent-elements/) · [ ] [238 Product Except Self](https://leetcode.com/problems/product-of-array-except-self/) · [ ] [128 Longest Consecutive Seq](https://leetcode.com/problems/longest-consecutive-sequence/)
