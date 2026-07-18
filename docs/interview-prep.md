@@ -164,10 +164,10 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 #### Sat Jul 18 (full day) — Heaps + Backtracking
 
 - Heaps (last Tier-1 — do first):
-  - [ ] [703 Kth Largest in Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/)
-  - [ ] [1046 Last Stone Weight](https://leetcode.com/problems/last-stone-weight/)
-  - [ ] [215 Kth Largest Element](https://leetcode.com/problems/kth-largest-element-in-an-array/) (also learn quickselect) ← common
-  - [ ] [973 K Closest Points](https://leetcode.com/problems/k-closest-points-to-origin/)
+  - [x] [703 Kth Largest in Stream](https://leetcode.com/problems/kth-largest-element-in-a-stream/) (~10 min; **the core "min-heap of size k" pattern**. Min-on-top is deliberate: evict the weakest survivor in O(log k), so top = kth largest. Gotchas: `heapify` is in-place/returns None; `nlargest` returns a plain list; `while`→`if` in add (push one at a time).)
+  - [x] [1046 Last Stone Weight](https://leetcode.com/problems/last-stone-weight/) (~5 min; **max-heap via negation** (`heapq` is min-only). Rule: "real→negate→heap; heap→negate→real", apply mechanically at push/pop edges. Classic slip: forgetting to negate the final return. `x - y` on two negated pops = the correctly-negated difference.)
+  - [x] [215 Kth Largest Element](https://leetcode.com/problems/kth-largest-element-in-an-array/) ← common (solved 3 ways: `nlargest`, heapify-all + pop-down-to-k, size-k min-heap. Heap answer is A-grade — can *explain* quickselect's O(n) motivation (partition → recurse one side) even without coding it. **📌 DOGEARED STRETCH: quickselect implementation** — count-based 3-way partition; revisit fresh, watch NeetCode's video. Not needed for the interview.)
+  - [x] [973 K Closest Points](https://leetcode.com/problems/k-closest-points-to-origin/) (compare squared dist `x*x+y*y`, skip sqrt. **THE key heap heuristic: a size-k heap uses the OPPOSITE orientation so its top = the weakest of your k = the eviction candidate.** k-largest→min-heap (703); k-smallest→max-heap (973). Eviction: `heapreplace` when new beats `heap[0]`.)
   - Stretch: [ ] [621 Task Scheduler](https://leetcode.com/problems/task-scheduler/)
 - Backtracking:
   - [ ] [78 Subsets](https://leetcode.com/problems/subsets/)
@@ -225,7 +225,8 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 
 #### Thu Jul 23 — 🏖️ DAY OFF WORK (interview eve — front-load, then taper)
 
-- **Morning (do the work):** Mock #2, fresh problems, 45-min timer. If it went well, optionally a 3rd mock — mocks are the single highest-value use of this day.
+- **Morning (do the work):** Mock #2, fresh problems, 45-min timer — **do this one inside the HackerRank sandbox/CodePair editor** to learn the real environment (no autocomplete, custom test input, Python 3 in the dropdown, whitespace behavior). If it went well, optionally a 3rd mock — mocks are the single highest-value use of this day.
+- **Setup check (do it today, not Fri 1pm):** Chrome + HackerRank CodePair, camera/mic test, stable internet, scratch paper ready. If it's video, tidy a small patch of background or sit against a plain wall (or use background blur).
 - **Midday:** Prep your **"why Anduril"** answer + 3–4 thoughtful interviewer questions. Re-code any 1–2 problems that felt shaky this week (Anki review).
 - **⚠️ Afternoon/evening — TAPER.** No new material, no grinding. The night before is for *rest and confidence*, not cramming. A tired brain interviews worse than a slightly-less-drilled one. Get good sleep.
 
