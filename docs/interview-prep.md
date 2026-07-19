@@ -22,7 +22,8 @@
 - **Sat Jul 17→18 update:** Day off will be **Thu Jul 23** (interview eve — Mock #2 + behavioral, then taper); **Mon Jul 20** has a work meeting so DP/Tries is compressed.
 - **Sat Jul 18 (full day):** **Heaps + Backtracking DONE.** Warmups 347 & 128 (learned: iterate the SET not the list to avoid O(n²) on dup-heavy inputs). Heaps (703, 1046, 215, 973): the size-k heap heuristic (top = weakest = eviction candidate; k-largest→min-heap, k-smallest→max-heap), max-heap-via-negation, `heappushpop` vs `heapreplace`. Quickselect dogeared. **ALL TIER 1 COMPLETE.** Backtracking (78, 39, 46, 79, 22): one choose/explore/un-choose skeleton; dedup varies (`start` / `used` / validity-prune). Backtracking's power = prune at the choice.
 - **Sat Jul 18 note:** Backtracking felt weak — flagged as the **top re-drill priority for Wed Jul 22** (re-code 78/39/46 cold). Anki cards for the three dedup variants.
-- **Next up (Sun Jul 19):** Graphs + Intervals/Greedy.
+- **Sun Jul 19 (full day):** **Graphs + Intervals + Greedy DONE — most of Tier 2 complete.** Warmups 238 (2-3 min, from memory now!) & 347. Graphs (200, 695, 994, 207, 133): every graph = DFS/BFS + a way to not revisit (visited/sink/clone-map/in-degree); learned multi-source BFS (994), Kahn's topo-sort (207, "seed from range(n)!"), old→new clone map. Intervals (56, 57, 435, 253): sort + one-pass; 435 greedy = sort-by-END (exchange argument); 253 heap-of-end-times = peak concurrency. Greedy (53 Kadane's, 55 Jump Game frontier). **Flagged for Wed re-drill: backtracking + intervals.** Lots of hints used today (esp. the greedy insights) — normal for first exposure; Thu mock = the cold-recall test.
+- **Next up (Mon Jul 20):** DP + Tries (Tier 3, compressed — work meeting). New-material learning is basically DONE after this; rest of week = mocks + review.
 
 ## Lessons learned — patterns that fought back
 
@@ -188,12 +189,12 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
   - [x] [994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) (multi-source BFS, ~27 min) (seed queue with ALL rotten at once; **BFS level = 1 minute**. Off-by-one fix: track a **`fresh` counter**, guard `while queue and fresh > 0` — stops before the pointless final wave AND handles `[[0]]`/`[[2]]` edge cases AND replaces the final sweep. Return `minutes if fresh==0 else -1`. Cleanup: use a `for dr,dc in [(0,1),(1,0),(0,-1),(-1,0)]` direction-loop.)
   - Stretch: [ ] [417 Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
 - Intervals/Greedy:
-  - [ ] [57 Insert Interval](https://leetcode.com/problems/insert-interval/)
-  - [ ] [56 Merge Intervals](https://leetcode.com/problems/merge-intervals/) ← common
-  - [ ] [435 Non-overlapping](https://leetcode.com/problems/non-overlapping-intervals/)
-  - [ ] [253 Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) (LC premium; [NeetCode](https://neetcode.io/problems/meeting-schedule-ii))
-  - [ ] [53 Max Subarray](https://leetcode.com/problems/maximum-subarray/) (Kadane's)
-  - [ ] [55 Jump Game](https://leetcode.com/problems/jump-game/)
+  - [x] [57 Insert Interval](https://leetcode.com/problems/insert-interval/) (pre-sorted input → **O(n) three-phase pass, no sort**: (1) add intervals ending before new; (2) EXPAND new via min-start/max-end over all overlaps, append ONCE after; (3) add the rest. Overlap case = grow-then-drop-once, not append-per-interval.)
+  - [x] [56 Merge Intervals](https://leetcode.com/problems/merge-intervals/) ← common (~30 min, over-engineered first with queue/range before trusting the simple pass) (**sort by start → one pass → each interval either extends `result[-1]` or starts new**. Overlap case is ONE line: `result[-1][1] = max(prev_end, curr_end)` (the `max` handles the fully-contained case — don't split into branches). Disjoint test `prev_end < curr_start` (strict `<` = touching intervals merge).)
+  - [x] [435 Non-overlapping](https://leetcode.com/problems/non-overlapping-intervals/) (greedy interval scheduling. Reframe: min-remove = max-keep-non-overlapping. **Sort by END time** — earliest finisher leaves the most room, provably safe (exchange argument); sort-by-start fails on `[[1,100],[2,3],[3,4]]` (long early interval hogs space). Loop: track `last_end`; `start < last_end` = overlap → remove current (later-ending), keep `last_end` (don't update it).)
+  - [x] [253 Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) (LC premium; [NeetCode](https://neetcode.io/problems/meeting-schedule-ii)) (answer = peak concurrency = min rooms. Sort by start; **min-heap of END times** = rooms in use; top = soonest-freeing room. Overlap → `heappush` (grow); reuse → `heappushpop` (constant). **Heap never shrinks → final `len(heap)` = peak = answer.**)
+  - [x] [53 Max Subarray](https://leetcode.com/problems/maximum-subarray/) (Kadane's) (`current = max(num, current+num)` = extend-or-restart; `best = max(best, current)`; init both to `nums[0]` for all-negative arrays. Bug caught: added a REDUNDANT `if current<0: current=0` — the `max` already restarts (when current<0, max always picks num). Two formulations (max-style vs reset-to-0-style); don't mix.)
+  - [x] [55 Jump Game](https://leetcode.com/problems/jump-game/) (greedy "farthest reach" frontier. Track `reach`; **CHECK `if i > reach: return False` BEFORE extending `reach = max(reach, i+nums[i])`** — order is load-bearing: since `i+nums[i] >= i`, extending first makes `reach >= i` always, killing the failure check. Mental model: flood line — can I stand on `i` before I use its jump?)
 
 #### Mon Jul 20 — DP + Tries (Tier 3 — the shock absorber; compress or drop if time's tight)
 
@@ -219,6 +220,7 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 #### Wed Jul 22 (AM) — Weak-area drilling + Array/Stack re-drill
 
 - **🎯 TOP PRIORITY: Backtracking re-drill** (flagged weak Sat Jul 18). Re-code cold, no hints, from the skeleton: [ ] 78 Subsets · [ ] 39 Combination Sum · [ ] 46 Permutations · [ ] (stretch) 79 Word Search. Goal: reproduce **choose/explore/un-choose** without looking, and correctly pick the dedup rule (`start` vs `used` vs validity-prune) per problem. If you can write 39 and 46 cold, you own it.
+- **🎯 ALSO: Intervals re-drill** (flagged Sun Jul 19 — felt un-digested). Re-code: [ ] 56 Merge · [ ] 57 Insert · [ ] 435 Non-overlapping · [ ] 253 Meeting Rooms II. Cement the recurring moves: **sort (by start for merge/insert, by end for scheduling); one pass tracking `last_end`/`result[-1]`; heap-of-end-times for concurrency.**
 - Re-code the 3–5 starred problems you missed. Re-do the single hardest problem from your two weakest categories, timed.
 - **Array & Hashing / Stack re-drill** (already solved — re-code cold, ~5–8 min each, no peeking). Pick the ones that feel rusty; these are the highest-frequency at Medium:
   - Arrays & Hashing: [ ] [1 Two Sum](https://leetcode.com/problems/two-sum/) · [ ] [49 Group Anagrams](https://leetcode.com/problems/group-anagrams/) · [ ] [347 Top K Frequent](https://leetcode.com/problems/top-k-frequent-elements/) · [ ] [238 Product Except Self](https://leetcode.com/problems/product-of-array-except-self/) · [ ] [128 Longest Consecutive Seq](https://leetcode.com/problems/longest-consecutive-sequence/)
