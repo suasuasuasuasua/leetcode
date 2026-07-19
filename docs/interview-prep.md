@@ -181,11 +181,11 @@ The two weekends carry all the heavy new material. Weekday mornings are single t
 #### Sun Jul 19 (full day) — Graphs + Intervals / Greedy
 
 - Graphs (top Tier-2 — reuses your BFS/DFS from trees):
-  - [ ] [200 Number of Islands](https://leetcode.com/problems/number-of-islands/) ← common
-  - [ ] [133 Clone Graph](https://leetcode.com/problems/clone-graph/)
-  - [ ] [695 Max Area of Island](https://leetcode.com/problems/max-area-of-island/)
-  - [ ] [207 Course Schedule](https://leetcode.com/problems/course-schedule/) (topo/cycle) ← common
-  - [ ] [994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) (multi-source BFS)
+  - [x] [200 Number of Islands](https://leetcode.com/problems/number-of-islands/) ← common (~15 min; DFS flood-fill. First bug: `else: return True` made the mark+recurse unreachable → over-counted. **`dfs` job = the SIDE EFFECT (sink the island); main loop counts** (unvisited land = +1). Optimal: **sink in-place `grid[r][c]="0"`** instead of a visited set → O(1) space, no hashing, base case collapses. Note: mutates input; huge grids → BFS to avoid stack overflow.)
+  - [x] [133 Clone Graph](https://leetcode.com/problems/clone-graph/) (DFS + **`old→new` node map** = doubles as visited-check AND neighbor-wiring. Cycles handled free: revisit → return existing clone. **KEY: record `seen[node]=copy` BEFORE recursing into neighbors** — else a cycle re-enters before the entry exists → infinite loop. "Mark before you recurse." O(V+E).)
+  - [x] [695 Max Area of Island](https://leetcode.com/problems/max-area-of-island/) (200 + a return value: `dfs` returns `1 + dfs(4 dirs)`, base case `0` — the "aggregate up" pattern from 104. Loop takes `max`. Gotcha: 695 grid is **int** `1/0`, 200 is **str** `"1"/"0"` — check input types up front!)
+  - [x] [207 Course Schedule](https://leetcode.com/problems/course-schedule/) (topo/cycle) ← common (~39 min, hard!) (**Kahn's algorithm = BFS topological sort**. `seen[course]`=in-degree (its prereqs); `deps[prereq]`=who it unlocks. Queue in-degree-0 nodes; taking one decrements dependents' in-degree; enqueue when hits 0. **Cycle detected FOR FREE: `taken < numCourses` ⇒ cycle.** KEY BUG: seed from `range(numCourses)` NOT dict keys — isolated nodes (course 0) get dropped otherwise. Signal for topo-sort: prerequisites/build-order/scheduling.)
+  - [x] [994 Rotting Oranges](https://leetcode.com/problems/rotting-oranges/) (multi-source BFS, ~27 min) (seed queue with ALL rotten at once; **BFS level = 1 minute**. Off-by-one fix: track a **`fresh` counter**, guard `while queue and fresh > 0` — stops before the pointless final wave AND handles `[[0]]`/`[[2]]` edge cases AND replaces the final sweep. Return `minutes if fresh==0 else -1`. Cleanup: use a `for dr,dc in [(0,1),(1,0),(0,-1),(-1,0)]` direction-loop.)
   - Stretch: [ ] [417 Pacific Atlantic Water Flow](https://leetcode.com/problems/pacific-atlantic-water-flow/)
 - Intervals/Greedy:
   - [ ] [57 Insert Interval](https://leetcode.com/problems/insert-interval/)
